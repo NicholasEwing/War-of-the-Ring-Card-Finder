@@ -6,6 +6,43 @@
   </head>
   <body>
     <h1>Header</h1>
-    <p>Welcome to this app</p>
+    <h2>Card Creation Form</h2>
+    <form action="/" method="POST">
+    	<label for="eventTitle">Event Card Title</label>
+    	<input type="text" id="eventTitle" name="card[eventTitle]" required>
+    	<label for="cardType">Card Type</label>
+    	<select name="card[cardType]" required>
+    		<option value="Character">Character</option>
+    		<option value="Army">Army</option>
+    		<option value="Muster">Muster</option>
+    	</select>
+    	<label for="eventPrecondition">Event Precondition</label>
+    	<input type="text" id="eventPrecondition" name="card[eventPrecondition]">
+    	<label for="eventText">Event Text</label>
+    	<input type="text" id="eventText" name="card[eventText]">
+    	<label for="eventDiscardCondition">Event Discard Condition</label>
+    	<input type="text" id="eventDiscardCondition" name="card[eventDiscardCondition]">
+    	<label for="combatTitle">Combat Title</label>
+    	<input type="combatTitle" name="card[combatTitle]">
+    	<label for="combatPrecondition">Combat Precondition</label>
+    	<input type="text" id="combatPrecondition" name="card[combatPrecondition]">
+    	<label for="combatText">Combat Text</label>
+    	<input type="text" id="combatText" name="card[combatText]">
+    	<label for="initiativeNumber">Combat Initiative Number</label>
+    	<input type="text" id="initiativeNumber" name="card[initiativeNumber]">
+    	<label for="cardNumber">Card Number</label>
+    	<input type="text" id="cardNumber" name="card[cardNumber]">
+    	<button type="submit">Submit</button>
+    </form>
+
+    <h2>List of Cards:</h2>
+    <ul>
+    <% if(cards.length) { %>
+	    <% cards.forEach(function(card) { %>
+	    	<li><%= card.eventTitle %></li>
+	    	<li><%= card.cardType %></li>
+	    <% })%>
+	<% } %>
+    </ul>
   </body>
 </html>
