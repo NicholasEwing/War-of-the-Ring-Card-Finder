@@ -1,8 +1,38 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+	font-family: sans-serif;
 }
 
-a {
-  color: #00B7FF;
+html {
+	height: 100%;
 }
+
+body {
+	min-height: 100%;
+	box-sizing: border-box;
+}
+
+div {
+	text-align: center;
+}
+
+label, button {
+	display: block;
+}
+
+button {
+	margin: 0 auto;
+}
+
+input {
+	width: 20%;
+}
+
+#eventText, #combatText {
+	width: 20%;
+	height: 100px;
+}
+
+
