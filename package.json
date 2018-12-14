@@ -1,12 +1,22 @@
 {
   "name": "warofthering-eventcards",
-  "version": "0.0.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "In this project, I've created a web application where you can search and find event cards from the popular War of the Ring (2nd Edition) board game.",
+  "main": "app.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicholasEwing/WarOfTheRing-EventCards.git"
+  },
+  "author": "Nicholas Ewing",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NicholasEwing/WarOfTheRing-EventCards/issues"
+  },
+  "homepage": "https://github.com/NicholasEwing/WarOfTheRing-EventCards#readme",
   "dependencies": {
-    "ejs": "~2.5.7",
-    "express": "~4.16.0",
+    "mongoose": "^5.4.0"
   }
 }
