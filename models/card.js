@@ -4,8 +4,10 @@ const mongoose = require("mongoose");
 const cardSchema = new mongoose.Schema({
 	// Event section
 	eventTitle: {type: String, unique: true, required: true},
+	deckSource: {type: String, required: true}, // options: Character Deck, Strategy Deck
 	faction: {type: String, required: true}, // options: Shadow, Free Peoples
 	type: {type: String, required: true}, // types: Character, Army, Muster
+	specialHuntTileImg: String,
 	precondition: String,
 	eventText: {type: String, required: true},
 	discardCondition: String,

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/NicholasEwing/WarOfTheRing-EventCards#readme",
   "dependencies": {
-    "mongoose": "^5.4.0"
+    "mongoose": "^5.4.0",
+    "multer": "^1.4.1"
   }
 }
