@@ -18,6 +18,7 @@ TODO:
 * ~~change card schema to include optional hunt tile image~~
 * ~~add "improved card text" to schema~~
 * ~~split creation form into separate route~~
+* create basic CSS styling for cards
 * create search function to find card titles in DB
 * get basic type-ahead feature to work
 * ensure search function searchs multiple parts of a card for a keyword, not just event title

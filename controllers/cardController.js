@@ -22,7 +22,11 @@ module.exports = {
 	createCard : async (req, res) => {
 		try {
 			const newCard = await Card.create(req.body);
-			newCard.specialHuntTileImg = `/images/${req.file.filename}`;
+			
+			if(req.file) {
+				newCard.specialHuntTileImg = `/images/${req.file.filename}`;
+			}
+
 			await newCard.save();
 			console.log("Created new card!");
 			res.redirect("/create");

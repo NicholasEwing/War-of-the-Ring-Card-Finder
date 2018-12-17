@@ -17,6 +17,7 @@ const cardSchema = new mongoose.Schema({
 	combatTitle: {type: String, required: true},
 	combatPrecondition: String,
 	combatText: {type: String, required: true},
+	improvedCombatText: {type: String, required: true},
 	initiativeNumber: {type: String, required: true}, // *see notes
 
 	cardNumber: {type: String, required: true} // ex: (3/24)
