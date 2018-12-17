@@ -10,6 +10,7 @@ const cardSchema = new mongoose.Schema({
 	specialHuntTileImg: String,
 	precondition: String,
 	eventText: {type: String, required: true},
+	improvedEventText: {type: String, required: true},
 	discardCondition: String,
 
 	// Combat section

@@ -30,9 +30,13 @@ input {
 	width: 20%;
 }
 
-#eventText, #combatText {
+textarea {
 	width: 20%;
 	height: 100px;
+}
+
+img {
+	max-width: 300px;
 }
 
 
