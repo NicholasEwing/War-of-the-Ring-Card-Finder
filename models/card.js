@@ -9,15 +9,18 @@ const cardSchema = new mongoose.Schema({
 	type: {type: String, required: true}, // types: Character, Army, Muster
 	specialHuntTileImg: String,
 	precondition: String,
+	improvedPrecondition: String,
 	eventText: {type: String, required: true},
-	improvedEventText: {type: String, required: true},
+	improvedEventText: String,
 	discardCondition: String,
+	improvedDiscardCondition: String,
 
 	// Combat section
 	combatTitle: {type: String, required: true},
 	combatPrecondition: String,
+	improvedCombatPrecondition: String,
 	combatText: {type: String, required: true},
-	improvedCombatText: {type: String, required: true},
+	improvedCombatText: String,
 	initiativeNumber: {type: String, required: true}, // *see notes
 
 	cardNumber: {type: String, required: true} // ex: (3/24)
