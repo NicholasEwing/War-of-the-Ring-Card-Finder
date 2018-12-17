@@ -13,16 +13,10 @@ module.exports = {
 	},
 	createCard : async (req, res) => {
 		try {
-			console.log("------- REQ.FILE ---------");
-			console.log(req.file);
-			console.log("--------------------------");
 			const newCard = await Card.create(req.body);
-			newCard.specialHuntTileImg = req.file.path;
-			console.log("special hunt tile img property")
-			console.log(newCard.specialHuntTileImg);
+			newCard.specialHuntTileImg = `/images/${req.file.filename}`;
 			await newCard.save();
-			console.log("Created new card! Printing result");
-			console.log(newCard);
+			console.log("Created new card!");
 			res.redirect("/");
 		} catch(err) {
 			res.send("Couldn't create card!");

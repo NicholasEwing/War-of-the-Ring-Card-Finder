@@ -14,8 +14,8 @@ Technologies used:
 TODO:
 * ~~Put in sample cards~~
 * ~~Create JSON file with mongoexport for seeding db later~~
-* change card creation form to allow images for hunt tiles
-* change card schema to include optional hunt tile image
+* ~~change card creation form to allow images for hunt tiles~~
+* ~~change card schema to include optional hunt tile image~~
 * add optional "improved card text" to schema
 * hide card creation form, test loading all cards from DB
 * create search function to find card titles in DB
