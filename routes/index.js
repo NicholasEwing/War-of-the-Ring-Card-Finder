@@ -18,4 +18,7 @@ router.route("/")
 	// make file upload keep original filename
 	.post(upload.single("specialHuntTileImg"), CardController.createCard);
 
+router.route("/create")
+	.get(CardController.getCreationForm)
+
 module.exports = router;

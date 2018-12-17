@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Card Generator</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div>
+   		<h1>Card Creation Form</h1>
+	    <form action="/" method="POST" enctype="multipart/form-data">
+	    	<label for="eventTitle">Event Card Title</label>
+	    	<input type="text" id="eventTitle" name="eventTitle" required>
+	    	<label for="deckSource">Deck Source</label>
+	    	<select id="deckSource" name="deckSource" required>
+	    		<option value="Character Deck">Character Deck</option>
+	    		<option value="Strategy Deck">Strategy Deck</option>
+	    	</select>
+	    	<label for="faction">Faction</label>
+	    	<select id="faction" name="faction">
+	    		<option value="Free Peoples">Free Peoples</option>
+	    		<option value="Shadow">Shadow</option>
+	    	</select>
+	    	<label for="type">Type</label>
+	    	<select id="type" name="type" required>
+	    		<option value="Character">Character</option>
+	    		<option value="Army">Army</option>
+	    		<option value="Muster">Muster</option>
+	    	</select>
+	    	<label for="precondition">Event Precondition</label>
+	    	<input type="text" id="precondition" name="precondition">
+	    	<label for="eventText">Event Text</label>
+	    	<textarea type="text" id="eventText" name="eventText"></textarea>
+	    	<label for="improvedEventText">Improved Event Text</label>
+	    	<textarea type="text" id="improvedEventText" name="improvedEventText"></textarea>
+	    	<label for="specialHuntTileImg">Special Hunt Tile Image</label>
+	    	<input type="file" id="specialHuntTileImg" name="specialHuntTileImg">
+	    	<label for="discardCondition">Event Discard Condition</label>
+	    	<input type="text" id="discardCondition" name="discardCondition">
+	    	<label for="combatTitle">Combat Title</label>
+	    	<input type="combatTitle" name="combatTitle">
+	    	<label for="combatPrecondition">Combat Precondition</label>
+	    	<input type="text" id="combatPrecondition" name="combatPrecondition">
+	    	<label for="combatText">Combat Text</label>
+	    	<textarea type="text" id="combatText" name="combatText"></textarea>
+	    	<label for="initiativeNumber">Combat Initiative Number</label>
+	    	<input type="text" id="initiativeNumber" name="initiativeNumber">
+	    	<label for="cardNumber">Card Number</label>
+	    	<input type="text" id="cardNumber" name="cardNumber">
+	    	<button type="submit">Submit</button>
+	    </form>
+	    <a href="/">Go Back</a>
+    </div>
+  </body>
+</html>

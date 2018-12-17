@@ -16,8 +16,8 @@ TODO:
 * ~~Create JSON file with mongoexport for seeding db later~~
 * ~~change card creation form to allow images for hunt tiles~~
 * ~~change card schema to include optional hunt tile image~~
-* add optional "improved card text" to schema
-* hide card creation form, test loading all cards from DB
+* ~~add "improved card text" to schema~~
+* ~~split creation form into separate route~~
 * create search function to find card titles in DB
 * get basic type-ahead feature to work
 * ensure search function searchs multiple parts of a card for a keyword, not just event title
