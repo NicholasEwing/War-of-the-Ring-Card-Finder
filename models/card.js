@@ -17,7 +17,7 @@ const cardSchema = new mongoose.Schema({
 	initiativeNumber: {type: String, required: true}, // *see notes
 
 	cardNumber: {type: String, required: true} // ex: (3/24)
-	});
+	}, {collection: "cards"});
 
 // *Notes:
 //	Must use String instead of Int since some cards

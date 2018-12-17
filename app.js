@@ -7,7 +7,7 @@ const indexRouter = require('./routes/index');
 const app = express();
 
 // Connect MongoDB
-const url = process.env.DATABASEURL || "mongodb://localhost/wotr-eventcards";
+const url = process.env.DATABASEURL || `mongodb+srv://arthix:${process.env.MONGO_PASS}@warofthering-eventcards-6hxxu.mongodb.net/wotr-eventcards?retryWrites=true`;
 mongoose.set("useCreateIndex", true);
 mongoose.connect(url, {useNewUrlParser: true});
 
@@ -38,7 +38,8 @@ app.use(function(err, req, res, next) {
 });
 
 
+const port = process.env.PORT || 3000
 // run server
-app.listen(3000, () => console.log("Server listening on port 3000."));
+app.listen(port, () => console.log("Server listening on port 3000."));
 
 module.exports = app;

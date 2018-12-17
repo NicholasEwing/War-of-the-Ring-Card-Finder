@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>wowow</title>
+    <title>Card Generator</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
@@ -9,34 +9,34 @@
    		<h1>Card Creation Form</h1>
 	    <form action="/" method="POST">
 	    	<label for="eventTitle">Event Card Title</label>
-	    	<input type="text" id="eventTitle" name="card[eventTitle]" required>
+	    	<input type="text" id="eventTitle" name="eventTitle" required>
 	    	<label for="faction">Faction</label>
-	    	<select id="faction" name="card[faction]">
+	    	<select id="faction" name="faction">
 	    		<option value="Free Peoples">Free Peoples</option>
 	    		<option value="Shadow">Shadow</option>
 	    	</select>
-	    	<label for="type">Card Type</label>
-	    	<select name="card[type]" required>
+	    	<label for="type">Type/label>
+	    	<select name="type" required>
 	    		<option value="Character">Character</option>
 	    		<option value="Army">Army</option>
 	    		<option value="Muster">Muster</option>
 	    	</select>
 	    	<label for="precondition">Event Precondition</label>
-	    	<input type="text" id="precondition" name="card[precondition]">
+	    	<input type="text" id="precondition" name="precondition">
 	    	<label for="eventText">Event Text</label>
-	    	<textarea type="text" id="eventText" name="card[eventText]"></textarea>
+	    	<textarea type="text" id="eventText" name="eventText"></textarea>
 	    	<label for="discardCondition">Event Discard Condition</label>
-	    	<input type="text" id="discardCondition" name="card[discardCondition]">
+	    	<input type="text" id="discardCondition" name="discardCondition">
 	    	<label for="combatTitle">Combat Title</label>
-	    	<input type="combatTitle" name="card[combatTitle]">
+	    	<input type="combatTitle" name="combatTitle">
 	    	<label for="combatPrecondition">Combat Precondition</label>
-	    	<input type="text" id="combatPrecondition" name="card[combatPrecondition]">
+	    	<input type="text" id="combatPrecondition" name="combatPrecondition">
 	    	<label for="combatText">Combat Text</label>
-	    	<textarea type="text" id="combatText" name="card[combatText]"></textarea>
+	    	<textarea type="text" id="combatText" name="combatText"></textarea>
 	    	<label for="initiativeNumber">Combat Initiative Number</label>
-	    	<input type="text" id="initiativeNumber" name="card[initiativeNumber]">
+	    	<input type="text" id="initiativeNumber" name="initiativeNumber">
 	    	<label for="cardNumber">Card Number</label>
-	    	<input type="text" id="cardNumber" name="card[cardNumber]">
+	    	<input type="text" id="cardNumber" name="cardNumber">
 	    	<button type="submit">Submit</button>
 	    </form>
     </div>
@@ -46,7 +46,7 @@
     <% if(cards.length) { %>
 	    <% cards.forEach(function(card) { %>
 	    	<li><%= card.eventTitle %></li>
-	    	<li><%= card.cardType %></li>
+	    	<li><%= card.type %></li>
 	    <% })%>
 	<% } %>
     </ul>
