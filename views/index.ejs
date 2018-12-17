@@ -15,7 +15,7 @@
 	    		<option value="Free Peoples">Free Peoples</option>
 	    		<option value="Shadow">Shadow</option>
 	    	</select>
-	    	<label for="type">Type/label>
+	    	<label for="type">Type</label>
 	    	<select name="type" required>
 	    		<option value="Character">Character</option>
 	    		<option value="Army">Army</option>
@@ -46,7 +46,6 @@
     <% if(cards.length) { %>
 	    <% cards.forEach(function(card) { %>
 	    	<li><%= card.eventTitle %></li>
-	    	<li><%= card.type %></li>
 	    <% })%>
 	<% } %>
     </ul>
