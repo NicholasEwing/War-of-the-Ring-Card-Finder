@@ -2,10 +2,10 @@ const Card = require("../models/card");
 const mongoose = require("mongoose");
 
 module.exports = {
-	getCards : async (req, res) => {
+	getCard : async (req, res) => {
 		try {
-			const cards = await Card.find({});
-			return res.render("index", {cards: cards});
+			const card = await Card.findOne({faction : "Free Peoples"});
+			return res.render("index", {card: card});
 		} catch(err) {
 			res.send("Something went wrong!");
 			console.log(err);

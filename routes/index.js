@@ -14,8 +14,7 @@ const upload = multer({storage: storage});
 
 /* GET home page. */
 router.route("/")
-	.get(CardController.getCards)
-	// make file upload keep original filename
+	.get(CardController.getCard)
 	.post(upload.single("specialHuntTileImg"), CardController.createCard);
 
 router.route("/create")
