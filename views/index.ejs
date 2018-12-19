@@ -6,14 +6,46 @@
   </head>
   <body>
     <h1>List of Cards:</h1>
+    <div>
+	    <form onsubmit="return getInfo()">
+	    	<input type="text" name="search">
+	    	<button type="submit">Submit</button>
+	    </form>
+	</div>
     <ul>
-    <% if(cards.length) { %>
-	    <% cards.forEach(function(card) { %>
-	    	<li><%= card.eventTitle %></li>
-	    	<img src="<%= card.specialHuntTileImg %>">
-	    <% })%>
-	<% } %>
-    </ul>
+	    	<div class="card">
+
+	    		<h1 class="event-title"><%= card.eventTitle %></h1>
+
+	    		<% if(card.precondition) { %>
+	    			<p class="event-precondition"><%= card.precondition %></p>
+	    		<% } %>
+
+	    		<p class="event-text"><%= card.eventText %></p>
+	    		
+<!-- 	    		<% if(card.specialHuntTileImg) {  %>
+	    			<img class="special-hunt-tile-img" src="<%= card.specialHuntTileImg %>">
+	    		<% } %> -->
+
+	    		<% if(card.discardCondition) { %>
+	    			<p class="discard-condition"><%= card.discardCondition %></p>
+	    		<% } %>
+
+	    		<h1 class="combat-title"><%= card.combatTitle%></h1>
+	    		
+	    		<% if(card.combatPrecondition) { %>
+	    			<p class="combat-precondition"><%= card.combatPrecondition %></p>
+	    		<% } %>
+
+	    		<p class="combat-text"><%= card.combatText %></p>
+
+	    		<p class="initiative-number"><%= card.initiativeNumber %></p>
+
+	    		<p class="card-number"><%= card.cardNumber %></p>
+	    		
+	    	</div>
+	</ul>
     <a href="/create">Create Card</a>
+   <script type="text/javascript" src="/javascripts/script.js"></script>
   </body>
 </html>

@@ -10,6 +10,13 @@
 	    <form action="/" method="POST" enctype="multipart/form-data">
 	    	<label for="eventTitle">Event Card Title</label>
 	    	<input type="text" id="eventTitle" name="eventTitle" required>
+	    	<label for="cardSize">Card Size (1 for highest, 4 for lowest)</label>
+	    	<select id="cardSize" name="cardSize" required>
+	    		<option value=1>1</option>
+	    		<option value=2>2</option>
+	    		<option value=3>3</option>
+	    		<option value=4>4</option>
+	    	</select>
 	    	<label for="deckSource">Deck Source</label>
 	    	<select id="deckSource" name="deckSource" required>
 	    		<option value="Character Deck">Character Deck</option>

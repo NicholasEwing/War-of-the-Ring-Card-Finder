@@ -39,4 +39,110 @@ img {
 	max-width: 300px;
 }
 
+.card {
+	position: relative;
+	background: url(/images/card-art/blanks/Blank-FP-Card-4.jpg);
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	width: 507px;
+	height: 942px;
+	-webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.75);
+	box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.75);
+	margin: 0 auto;
+}
 
+.event-title {
+	position: absolute;
+	top: 5%;
+	left: 50%;
+	font-size: 1.5rem;
+	margin-left: -4.5rem;
+}
+
+.precondition {
+	font-weight: bold;
+}
+
+.event-text {
+	position: absolute;
+    top: 17%;
+    left: 50%;
+    width: 73%;
+    text-align: left;
+    margin-left: -9rem;
+}
+
+.special-hunt-tile-img {
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	margin-left: -5rem;
+}
+
+.discard-condition {
+	
+}
+
+.combat-title {
+	position: absolute;
+	top: 52%;
+	left: 50%;
+	font-size: 1.5rem;
+	margin-left: -3rem;
+}
+
+.combat-precondition {
+	position: absolute;
+	top: 57%;
+	left: 50%;
+    width: 73%;
+    text-align: left;
+    margin-left: -9rem;
+    font-weight: bold;
+}
+
+.combat-text {
+	position: absolute;
+	top: 65%;
+	left: 50%;
+	width: 73%;
+	text-align: left;
+	margin-left: -9rem;
+}
+
+
+.initiative-number {
+	position: absolute;
+	font-weight: bold;
+	top: 89%;
+	left: 13%;
+} 
+
+.card-number {
+	position: absolute;
+	top: 96%;
+	font-size: 0.6rem;
+	right: 2.75%;
+	color: white;
+}
+
+.event-precondition, .combat-precondition, .event-text, .discard-condition {
+	white-space: pre-wrap;
+}
+/*
+@media (min-width:768px) {
+    .card {
+        background-image: url(/images/card-art/Blank-FP-Card.jpg);
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-position: center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
+        min-height: 725px;
+    }
+}
+
+*/
