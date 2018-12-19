@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 module.exports = {
 	getCard : async (req, res) => {
 		try {
-			const card = await Card.findOne({faction : "Free Peoples"});
+			const card = await Card.findOne({eventTitle : "The Last Battle"});
 			return res.render("index", {card: card});
 		} catch(err) {
 			res.send("Something went wrong!");

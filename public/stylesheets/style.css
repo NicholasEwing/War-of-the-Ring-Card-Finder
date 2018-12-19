@@ -1,8 +1,35 @@
+@font-face {
+	src: url(../fonts/PonaDisplay-LightItalic.otf);
+	font-family: PonaDisplay;
+	font-style: italic;
+}
+
+@font-face {
+	src: url(../fonts/PonaDisplay-Medium.otf);
+	font-family: PonaDisplay;
+	font-style: normal;
+	font-weight: 400;
+}
+
+
+@font-face {
+	src: url(../fonts/PonaDisplay-SemiBold.otf);
+	font-family: PonaDisplay;
+	font-style: normal;
+	font-weight: 600;
+}
+
+@font-face {
+	src: url(../fonts/PonaDisplay-Bold.otf);
+	font-family: PonaDisplay;
+	font-style: bold;
+	font-weight: 700;
+}
+
 *,
 *::before,
 *::after {
 	box-sizing: inherit;
-	font-family: sans-serif;
 }
 
 html {
@@ -41,7 +68,7 @@ img {
 
 .card {
 	position: relative;
-	background: url(/images/card-art/blanks/Blank-FP-Card-4.jpg);
+	background: url(/images/card-art/blanks/Blank-FP-Card-2.jpg);
 	background-size: auto 100%;
 	background-repeat: no-repeat;
 	width: 507px;
@@ -50,28 +77,36 @@ img {
 	-moz-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.75);
 	box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.75);
 	margin: 0 auto;
+	padding: 60px;
+}
+
+.event-text, .event-precondition, .discard-condition {
+	margin: 2% 2% 2% 2%;
+	font-size: 1.1rem;
+	font-family: PonaDisplay;
+}
+
+.card p {
+	text-align: left;
 }
 
 .event-title {
-	position: absolute;
-	top: 5%;
-	left: 50%;
-	font-size: 1.5rem;
-	margin-left: -4.5rem;
+	font-size: 1.75rem;
+	width: 50%;
+	margin: 0 auto;
+	margin-bottom: 5%;
+	font-family: PonaDisplay;
+	font-style: bold;
 }
 
-.precondition {
-	font-weight: bold;
+.event-precondition {
+	font-weight: 600;
 }
 
-.event-text {
-	position: absolute;
-    top: 17%;
-    left: 50%;
-    width: 73%;
-    text-align: left;
-    margin-left: -9rem;
+.discard-condition {
+	font-style: italic;
 }
+
 
 .special-hunt-tile-img {
 	position: absolute;
@@ -80,35 +115,12 @@ img {
 	margin-left: -5rem;
 }
 
-.discard-condition {
-	
-}
-
 .combat-title {
 	position: absolute;
 	top: 52%;
 	left: 50%;
 	font-size: 1.5rem;
 	margin-left: -3rem;
-}
-
-.combat-precondition {
-	position: absolute;
-	top: 57%;
-	left: 50%;
-    width: 73%;
-    text-align: left;
-    margin-left: -9rem;
-    font-weight: bold;
-}
-
-.combat-text {
-	position: absolute;
-	top: 65%;
-	left: 50%;
-	width: 73%;
-	text-align: left;
-	margin-left: -9rem;
 }
 
 
