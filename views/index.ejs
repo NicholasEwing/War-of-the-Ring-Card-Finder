@@ -12,8 +12,10 @@
 	    </form>
 	</div>
 	    	<div class="card">
+	    		<!-- Keeping event title outside of event box because
+	    		it's not as variable as the combat title / combat box -->
 		    	<h1 class="event-title"><%= card.eventTitle %></h1>
-	    		<div class="event-box">
+	    		<div class="event-box-shadow">
 
 		    		<% if(card.precondition) { %>
 		    			<p class="event-precondition"><%= card.precondition %></p>
@@ -30,7 +32,7 @@
 		    		<% } %>
 		    	</div>
 
-	    		<div class="combat-box box-4">
+	    		<div class="combat-box-shadow box-4">
 		    		<h1 class="combat-title"><%= card.combatTitle%></h1>
 		    		
 		    		<% if(card.combatPrecondition) { %>

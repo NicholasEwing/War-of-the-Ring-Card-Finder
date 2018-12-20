@@ -1,4 +1,4 @@
- Custom Fonts - ensure fallback and browser compatability*/
+ /*Custom Fonts - ensure fallback and browser compatability*/
 
 @font-face {
 	src: url(../fonts/PonaDisplay-LightItalic.otf);
@@ -28,8 +28,8 @@
 	font-weight: 700;
 }
 
-
 /* Begin Styles */
+
 *,
 *::before,
 *::after {
@@ -70,9 +70,11 @@ img {
 	max-width: 300px;
 }
 
+/* ----- General Card Settings -----*/
+
 .card {
 	position: relative;
-	background: url(/images/card-art/blanks/Blank-FP-Card-4.jpg);
+	background: url(/images/card-art/blanks/Blank-Shadow-Card-4.jpg);
 	background-size: auto 100%;
 	background-repeat: no-repeat;
 	width: 429px;
@@ -82,20 +84,6 @@ img {
 	box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.75);
 	margin: 0 auto;
 	padding: 50px;
-}
-
-
-
-/* -------- Event Section --------*/
-
-
-.event-box {
-	position: absolute;
-	top: 14%;
-	width: 315px;
-}
-.event-box p {
-	text-align: left;
 }
 
 .event-text,
@@ -109,15 +97,35 @@ img {
 	white-space: pre-wrap;
 }
 
+/* -------- Event Section --------*/
+
+.event-box-fp p, 
+.event-box-shadow p {
+	text-align: left;
+}
+
+.event-box-fp {
+	position: absolute;
+	top: 14%;
+	width: 315px;
+}
+
+.event-box-shadow {
+	position: absolute;
+	top: 17%;
+	width: 315px;
+}
+
 .event-title {
 	font-size: 1.25rem;
-	width: 60%;
+	width: 70%;
 	margin: 0 auto;
 	font-family: PonaDisplay;
 	font-style: bold;
 }
 
-.event-precondition, .combat-precondition {
+.event-precondition, 
+.combat-precondition {
 	font-weight: 600;
 }
 
@@ -132,40 +140,44 @@ img {
 	margin-left: -5rem;
 }
 
-/* --------------------------------*/
-
-
-
 /* -------- Combat Section --------*/
 
-.combat-box {
+.combat-box-fp {
 	width: 325px;
 	height: 200px;
 	text-align: right;
 }
 
+.combat-box-shadow {
+	width: 280px;
+	height: 200px;
+	text-align: right;
+}
+
  /*Each box fits text for Blank-{faction}-Card-{num}*/
+.box-1,
+.box-2,
+.box-3,
+.box-4 {
+	position: absolute;
+}
 
 .box-1 {
-	position: absolute;
 	bottom: 25%;
 	right: 12%;
 }
 
 .box-2 {
-	position: absolute;
 	bottom: 21%;
 	right: 11%;
 }
 
 .box-3 {
-	position: absolute;
 	bottom: 13%;
 	right: 11%;
 }
 
 .box-4 {
-	position: absolute;
 	bottom: 8%;
 	right: 11%;
 }
@@ -177,8 +189,6 @@ img {
 	font-family: PonaDisplay;
 	font-style: bold;
 }
-
-/* --------------------------------*/
 
 /* ------- Bottom Card Text -------*/
 
@@ -196,5 +206,3 @@ img {
 	right: 2.75%;
 	color: white;
 }
-
-/* --------------------------------
