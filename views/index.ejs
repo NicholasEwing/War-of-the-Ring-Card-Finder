@@ -11,10 +11,9 @@
 	    	<button type="submit">Submit</button>
 	    </form>
 	</div>
-    <ul>
 	    	<div class="card">
+		    	<h1 class="event-title"><%= card.eventTitle %></h1>
 	    		<div class="event-box">
-		    		<h1 class="event-title"><%= card.eventTitle %></h1>
 
 		    		<% if(card.precondition) { %>
 		    			<p class="event-precondition"><%= card.precondition %></p>
@@ -31,7 +30,7 @@
 		    		<% } %>
 		    	</div>
 
-	    		<div class="combat-box box-1">
+	    		<div class="combat-box box-4">
 		    		<h1 class="combat-title"><%= card.combatTitle%></h1>
 		    		
 		    		<% if(card.combatPrecondition) { %>
@@ -46,7 +45,6 @@
 	    		<p class="card-number"><%= card.cardNumber %></p>
 	    		
 	    	</div>
-	</ul>
     <a href="/create">Create Card</a>
    <script type="text/javascript" src="/javascripts/script.js"></script>
   </body>

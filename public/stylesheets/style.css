@@ -1,4 +1,4 @@
-/* Custom Fonts - ensure fallback and browser compatability*/
+ Custom Fonts - ensure fallback and browser compatability*/
 
 @font-face {
 	src: url(../fonts/PonaDisplay-LightItalic.otf);
@@ -88,6 +88,12 @@ img {
 
 /* -------- Event Section --------*/
 
+
+.event-box {
+	position: absolute;
+	top: 14%;
+	width: 315px;
+}
 .event-box p {
 	text-align: left;
 }
@@ -98,21 +104,20 @@ img {
 .combat-text,
 .combat-precondition {
 	margin: 2% 2% 2% 2%;
-	font-size: 0.9rem;
+	font-size: 0.95rem;
 	font-family: PonaDisplay;
 	white-space: pre-wrap;
 }
 
 .event-title {
-	font-size: 1.5rem;
-	width: 50%;
+	font-size: 1.25rem;
+	width: 60%;
 	margin: 0 auto;
-	margin-bottom: 5%;
 	font-family: PonaDisplay;
 	font-style: bold;
 }
 
-.event-precondition {
+.event-precondition, .combat-precondition {
 	font-weight: 600;
 }
 
@@ -139,28 +144,36 @@ img {
 	text-align: right;
 }
 
+ /*Each box fits text for Blank-{faction}-Card-{num}*/
+
 .box-1 {
 	position: absolute;
-	bottom: 8%;
+	bottom: 25%;
 	right: 12%;
 }
 
 .box-2 {
-
+	position: absolute;
+	bottom: 21%;
+	right: 11%;
 }
 
 .box-3 {
-
+	position: absolute;
+	bottom: 13%;
+	right: 11%;
 }
 
 .box-4 {
-
+	position: absolute;
+	bottom: 8%;
+	right: 11%;
 }
 
 .combat-title {
-	font-size: 1.5rem;
+	font-size: 1.25rem;
 	margin: 0 auto;
-	margin-bottom: 5%;
+	margin-bottom: 2%;
 	font-family: PonaDisplay;
 	font-style: bold;
 }
@@ -184,4 +197,4 @@ img {
 	color: white;
 }
 
-/* --------------------------------*/
+/* --------------------------------
