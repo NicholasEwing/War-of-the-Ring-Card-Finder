@@ -5,7 +5,6 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>List of Cards:</h1>
     <div>
 	    <form onsubmit="return getInfo()">
 	    	<input type="text" name="search">
@@ -14,30 +13,33 @@
 	</div>
     <ul>
 	    	<div class="card">
+	    		<div class="event-box">
+		    		<h1 class="event-title"><%= card.eventTitle %></h1>
 
-	    		<h1 class="event-title"><%= card.eventTitle %></h1>
+		    		<% if(card.precondition) { %>
+		    			<p class="event-precondition"><%= card.precondition %></p>
+		    		<% } %>
 
-	    		<% if(card.precondition) { %>
-	    			<p class="event-precondition"><%= card.precondition %></p>
-	    		<% } %>
+		    		<p class="event-text"><%= card.eventText %></p>
+		    		
+		    		<% if(card.specialHuntTileImg) {  %>
+		    			<img class="special-hunt-tile-img" src="<%= card.specialHuntTileImg %>">
+		    		<% } %>
 
-	    		<p class="event-text"><%= card.eventText %></p>
-	    		
-<!-- 	    		<% if(card.specialHuntTileImg) {  %>
-	    			<img class="special-hunt-tile-img" src="<%= card.specialHuntTileImg %>">
-	    		<% } %> -->
+		    		<% if(card.discardCondition) { %>
+		    			<p class="discard-condition"><%= card.discardCondition %></p>
+		    		<% } %>
+		    	</div>
 
-	    		<% if(card.discardCondition) { %>
-	    			<p class="discard-condition"><%= card.discardCondition %></p>
-	    		<% } %>
+	    		<div class="combat-box box-1">
+		    		<h1 class="combat-title"><%= card.combatTitle%></h1>
+		    		
+		    		<% if(card.combatPrecondition) { %>
+		    			<p class="combat-precondition"><%= card.combatPrecondition %></p>
+		    		<% } %>
 
-<!-- 	    		<h1 class="combat-title"><%= card.combatTitle%></h1>
-	    		
-	    		<% if(card.combatPrecondition) { %>
-	    			<p class="combat-precondition"><%= card.combatPrecondition %></p>
-	    		<% } %>
-
-	    		<p class="combat-text"><%= card.combatText %></p> -->
+		    		<p class="combat-text"><%= card.combatText %></p>
+	    		</div>
 
 	    		<p class="initiative-number"><%= card.initiativeNumber %></p>
 
