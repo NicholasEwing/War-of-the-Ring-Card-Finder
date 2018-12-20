@@ -25,18 +25,20 @@ TODO:
 	* create all image assets for card type (only need FP character icon now)
 * __CSS__
 	* ~~create basic CSS styling for cards~~
-	* figure out proper CSS styling & spacing for card text - each card size might have it's own styling rules
-		* Event title
-		* Event precondition
-		* Event text
-		* Event discard condition
-		* Combat title
-		* Combat precondition
-		* Combat text
-		* Combat discard condition
-		* Combat initative number
-		* card number (collection)
+	* ~~figure out proper CSS styling & spacing for card text - each card size has its own styling rules~~
+		* ~~Event title~~
+		* ~~Event precondition~~
+		* ~~Event text~~
+		* ~~Event discard condition~~
+		* ~~Combat title~~
+		* ~~Combat precondition~~
+		* ~~Combat text~~
+		* ~~Combat discard condition~~
+		* ~~Combat initative number~~
+		* ~~card number (collection)~~
 	* Polish card images, remove white pixels on edge in Photoshop and improve textures
+		* Blank-Shadow-Card-4 (need to move right slightly)
+		* Finish list of cards that need polish
 * __Search feature__
 	* create search function to find card titles in DB
 		* ensure card type icons are set
