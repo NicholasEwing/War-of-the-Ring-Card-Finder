@@ -6,10 +6,11 @@ module.exports = {
 		try {
 			if(req.query.search) {
 				const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-				const card = await Card.findOne({eventTitle : regex});
-				res.render("index", {card: card});
+				console.log(regex)
+				const card = await Card.find({eventTitle : regex});
+				res.json(card);
 			} else {
-				console.log("no search, pull default")
+				console.log("no search, pull default");
 				// placeholder for now if no one searches a card
 				const card = await Card.findOne({eventTitle : "Balrog of Moria"});
 				res.render("index", {card: card});

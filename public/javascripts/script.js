@@ -1,11 +1,27 @@
-function getInfo() {
-	var searchInput = document.querySelector("input");
-	var value = searchInput.value;
-	console.log(value);
-	// make this return searched card
-
+function displayMatches() {
+	console.log(this.value);
+	var value = this.value.trim();
 	var request = new XMLHttpRequest();
-	// change card bg based on card size and card faction
-	// change card type icon based on card type
-	return false;
+	request.responseType = "json";
+	request.open("GET", "/?search=" + value);
+
+	request.onload = function() {
+		if(this.status === 200) {
+			var res = this.response;
+			console.log(res);
+			console.log(type);
+		} else if(this.status === 404) {
+			console.log("Error occurred")
+		}
+	}
+
+	request.onerror = function() {
+		console.log("Something went wrong!");
+	}
+
+	request.send();
+
 }
+
+var searchInput = document.querySelector("input");
+searchInput.addEventListener("keyup", displayMatches);
