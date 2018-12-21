@@ -15,7 +15,7 @@
 
 
 @font-face {
-	src: url(../fonts/PonaDisplay-SemiBold.otf);
+	src: url(../fonts/PonaDisplay-Semibold.otf);
 	font-family: PonaDisplay;
 	font-style: normal;
 	font-weight: 600;
@@ -74,8 +74,6 @@ img {
 
 .card {
 	position: relative;
-	background: url(/images/card-art/blanks/Blank-Shadow-Card-4.jpg);
-	background-size: auto 100%;
 	background-repeat: no-repeat;
 	width: 429px;
 	height: 800px;
@@ -84,6 +82,46 @@ img {
 	box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.75);
 	margin: 0 auto;
 	padding: 50px;
+}
+
+.shadow-1 {
+	background: url(/images/card-art/blanks/Blank-Shadow-Card-1.jpg);
+	background-size: auto 100%;
+}
+
+.shadow-2 {
+	background: url(/images/card-art/blanks/Blank-Shadow-Card-2.jpg);
+	background-size: auto 100%;
+}
+
+.shadow-3 {
+	background: url(/images/card-art/blanks/Blank-Shadow-Card-3.jpg);
+	background-size: auto 100%;
+}
+
+.shadow-4 {
+	background: url(/images/card-art/blanks/Blank-Shadow-Card-4.jpg);
+	background-size: auto 100%;
+}
+
+.fp-1 {
+	background: url(/images/card-art/blanks/Blank-FP-Card-1.jpg);
+	background-size: auto 100%;
+}
+
+.fp-2 {
+	background: url(/images/card-art/blanks/Blank-FP-Card-2.jpg);
+	background-size: auto 100%;
+}
+
+.fp-3 {
+	background: url(/images/card-art/blanks/Blank-FP-Card-3.jpg);
+	background-size: auto 100%;
+}
+
+.fp-4 {
+	background: url(/images/card-art/blanks/Blank-FP-Card-4.jpg);
+	background-size: auto 100%;
 }
 
 .event-text,
@@ -118,7 +156,7 @@ img {
 
 .event-title {
 	font-size: 1.25rem;
-	width: 70%;
+	width: 63%;
 	margin: 0 auto;
 	font-family: PonaDisplay;
 	font-style: bold;

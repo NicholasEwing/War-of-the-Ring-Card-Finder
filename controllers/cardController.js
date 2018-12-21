@@ -4,8 +4,17 @@ const mongoose = require("mongoose");
 module.exports = {
 	getCard : async (req, res) => {
 		try {
-			const card = await Card.findOne({eventTitle : "Balrog of Moria"});
-			return res.render("index", {card: card});
+			if(req.query.search) {
+				const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+				const card = await Card.findOne({eventTitle : regex});
+				res.render("index", {card: card});
+			} else {
+				console.log("no search, pull default")
+				// placeholder for now if no one searches a card
+				const card = await Card.findOne({eventTitle : "Balrog of Moria"});
+				res.render("index", {card: card});
+			}
+
 		} catch(err) {
 			res.send("Something went wrong!");
 			console.log(err);
@@ -34,5 +43,17 @@ module.exports = {
 			res.send("Couldn't create card!");
 			console.log(err);
 		}
+	},
+	test : async (req, res) => {
+		try {
+			console.log("WOW");
+			res.send("bam");
+		} catch(err) {
+			console.log("Error occurred");
+		}
 	}
 }
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};

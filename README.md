@@ -22,7 +22,8 @@ TODO:
 * __Assets__
 	* ~~create all image assets for card background (shadow / fp)~~
 	* ~~turns out there are 4 card size variants per faction, turn these into image assets as well~~
-	* create all image assets for card type (only need FP character icon now)
+	* create FP character icon
+	* create Special Hunt Tile icons
 * __CSS__
 	* ~~create basic CSS styling for cards~~
 	* ~~figure out proper CSS styling & spacing for card text - each card size has its own styling rules~~
@@ -36,14 +37,17 @@ TODO:
 		* ~~Combat discard condition~~
 		* ~~Combat initative number~~
 		* ~~card number (collection)~~
-	* Polish card images, remove white pixels on edge in Photoshop and improve textures
-		* Blank-Shadow-Card-4 (need to move right slightly)
-		* Finish list of cards that need polish
+	* ~~Polish card images, remove white pixels on edge in Photoshop and improve textures~~
+		* ~~Blank-FP-Card-1 (remove white background on card #)~~
+		* ~~Blank-FP-Card-2 (remove white background on card #)~~
+		* ~~Blank-FP-Card-3 (remove white background on card #)~~
+		* ~~Blank-FP-Card-4 (remove white background on card #)~~
+		* ~~Blank-Shadow-Card-4 (need to move right slightly)~~
 * __Search feature__
 	* create search function to find card titles in DB
 		* ensure card type icons are set
-		* ensure correct card bg and card size are chosed
-	* enable fuzzy searching
+		* ~~ensure correct card bg and card size are chosed~~
+	* ~~enable fuzzy searching~~
 	* enable all text fields to be queried, not just card titles
 * __Type-ahead & suggestions__
 	* get basic type-ahead feature to work

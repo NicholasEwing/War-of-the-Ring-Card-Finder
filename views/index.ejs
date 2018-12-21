@@ -6,16 +6,17 @@
   </head>
   <body>
     <div>
-	    <form onsubmit="return getInfo()">
+	    <form action="/" method="GET">
 	    	<input type="text" name="search">
 	    	<button type="submit">Submit</button>
 	    </form>
 	</div>
-	    	<div class="card">
-	    		<!-- Keeping event title outside of event box because
-	    		it's not as variable as the combat title / combat box -->
+		<% if(card === null) { %>
+			<h1>No card found!</h1>
+		<% } else { %>
+	    	<div class="card <%= card.faction %>-<%= card.cardSize %>">
 		    	<h1 class="event-title"><%= card.eventTitle %></h1>
-	    		<div class="event-box-shadow">
+	    		<div class="event-box-<%= card.faction %>">
 
 		    		<% if(card.precondition) { %>
 		    			<p class="event-precondition"><%= card.precondition %></p>
@@ -32,7 +33,7 @@
 		    		<% } %>
 		    	</div>
 
-	    		<div class="combat-box-shadow box-4">
+	    		<div class="combat-box-<%= card.faction %> box-<%= card.cardSize %>">
 		    		<h1 class="combat-title"><%= card.combatTitle%></h1>
 		    		
 		    		<% if(card.combatPrecondition) { %>
@@ -47,6 +48,7 @@
 	    		<p class="card-number"><%= card.cardNumber %></p>
 	    		
 	    	</div>
+	    <% } %>
     <a href="/create">Create Card</a>
    <script type="text/javascript" src="/javascripts/script.js"></script>
   </body>
