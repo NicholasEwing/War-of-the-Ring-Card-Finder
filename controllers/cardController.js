@@ -8,6 +8,7 @@ module.exports = {
 				const regex = new RegExp(escapeRegex(req.query.search), 'gi');
 				console.log(regex)
 				const card = await Card.find({eventTitle : regex});
+				// res.render("index", {card: card});
 				res.json(card);
 			} else {
 				console.log("no search, pull default");

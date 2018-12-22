@@ -20,7 +20,4 @@ router.route("/")
 router.route("/create")
 	.get(CardController.getCreationForm)
 
-router.route("/search")
-	.get(CardController.getCard)
-
 module.exports = router;

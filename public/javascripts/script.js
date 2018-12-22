@@ -9,7 +9,6 @@ function displayMatches() {
 		if(this.status === 200) {
 			var res = this.response;
 			console.log(res);
-			console.log(type);
 		} else if(this.status === 404) {
 			console.log("Error occurred")
 		}
