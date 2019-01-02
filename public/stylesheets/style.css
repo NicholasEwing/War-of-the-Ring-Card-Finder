@@ -70,10 +70,61 @@ img {
 	max-width: 300px;
 }
 
+/* ----- Search Bar Settings -----*/
+input {
+	width: 40%;
+	border: 3px solid rgba(178,151,114,1);
+	padding: 5px;
+	font-size: 20px;
+	height: 50px;
+	outline: none;
+}
+
+ul {
+	position: absolute;
+	z-index: 1;
+	width: 39.5%;
+	padding: 0;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+}
+
+li {
+	list-style: none;
+	background-color: rgba(178,151,114,1);
+	opacity: 0.85;
+	/*background-color: rgba(150,120,96,0.9);*/
+	transition: opacity 0.20s ease-in;
+	margin: 0 auto;
+	padding: 2%;
+	border-left: 1px solid rgba(0,0,0,0.15);
+	border-right: 1px solid rgba(0,0,0,0.15);
+	border-bottom: 1px solid rgba(0,0,0,0.15);
+}
+
+li:focus {
+	opacity: 1;
+	outline-color: rgba(150,120,96,0.9);
+	/*background-color: rgba(178,151,114,1);*/
+}
+
+li h1 {
+	text-align: left;
+	margin: 0;
+	font-size: 25px;
+}
+
+li p {
+	text-align: left;
+	font-size: 18px;
+	margin: 0;
+}
+
 /* ----- General Card Settings -----*/
 
 .card {
-	position: relative;
+	position: absolute;
 	background-repeat: no-repeat;
 	width: 429px;
 	height: 800px;
@@ -81,6 +132,8 @@ img {
 	-moz-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.75);
 	box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.75);
 	margin: 0 auto;
+	left: 0;
+	right: 0;
 	padding: 50px;
 }
 
@@ -130,7 +183,7 @@ img {
 .combat-text,
 .combat-precondition {
 	margin: 2% 2% 2% 2%;
-	font-size: 0.95rem;
+	font-size: 19px;
 	font-family: PonaDisplay;
 	white-space: pre-wrap;
 }
@@ -155,7 +208,7 @@ img {
 }
 
 .event-title {
-	font-size: 1.25rem;
+	font-size: 25px;
 	width: 63%;
 	margin: 0 auto;
 	font-family: PonaDisplay;
@@ -221,7 +274,7 @@ img {
 }
 
 .combat-title {
-	font-size: 1.25rem;
+	font-size: 25px;
 	margin: 0 auto;
 	margin-bottom: 2%;
 	font-family: PonaDisplay;

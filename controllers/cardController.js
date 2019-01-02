@@ -7,6 +7,7 @@ module.exports = {
 			if(req.query.search) {
 				const regex = new RegExp(escapeRegex(req.query.search), 'gi');
 				console.log(regex)
+				// change to findOne for basic testing
 				const card = await Card.find({eventTitle : regex});
 				// res.render("index", {card: card});
 				res.json(card);
