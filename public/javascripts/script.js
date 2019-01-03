@@ -1,5 +1,15 @@
-function createItem(num) {
+function highlightMatches(regex, str){
+	var highlightedText =  str.replace(regex, function(match) {
+		return `<span class="highlight">${match}</span>`;
+	});
+
+	return highlightedText;
+}
+
+function createItem(num, value) {
 	deleteItems();
+
+	var regex = new RegExp(value, "gi");
 
 	if(num !== null) {
 		num.forEach(function(card) {
@@ -8,11 +18,15 @@ function createItem(num) {
 
 			// event title
 			var h1 = document.createElement("h1");
-			h1.innerHTML = card.eventTitle;
+			var titleHighlight = highlightMatches(regex, card.eventTitle);
+
+			h1.innerHTML = titleHighlight;
 
 			// event text
 			var p = document.createElement("p");
-			p.innerHTML = card.eventText.substring(0, 155) + "...";
+			var substr = card.eventText.substring(0, 155) + "...";
+			var txtHighlight = highlightMatches(regex, substr)
+			p.innerHTML = txtHighlight;
 
 			// add title & text to li
 			li.appendChild(h1);
@@ -40,7 +54,8 @@ function displayMatches() {
 			if(this.status === 200) {
 				var res = this.response;
 				// add styled li using response data to create card previews
-				createItem(res);
+				createItem(res, value);
+				// highlightItems(value);
 				// move card render logic to client side
 					// render card when its li is selected
 			} else if(this.status === 404) {

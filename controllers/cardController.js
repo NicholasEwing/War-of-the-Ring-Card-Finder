@@ -6,9 +6,13 @@ module.exports = {
 		try {
 			if(req.query.search) {
 				const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-				console.log(regex)
+				console.log(regex);
 				// change to findOne for basic testing
-				const card = await Card.find({eventTitle : regex});
+				const card = await Card.find(
+					{$or: [
+						{eventTitle : regex},
+						{eventText : regex}	
+					]});
 				// res.render("index", {card: card});
 				res.json(card);
 			} else {

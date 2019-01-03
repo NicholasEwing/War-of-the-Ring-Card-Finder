@@ -121,6 +121,10 @@ li p {
 	margin: 0;
 }
 
+.highlight {
+	background-color: rgb(255, 251, 204);
+}
+
 /* ----- General Card Settings -----*/
 
 .card {
