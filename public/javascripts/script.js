@@ -1,39 +1,70 @@
-function highlightMatches(regex, str){
-	var highlightedText =  str.replace(regex, function(match) {
-		return `<span class="highlight">${match}</span>`;
+function buildNav(res, regex, pages) {
+	var current = 1;
+	var li = document.createElement("li");
+	var p = document.createElement("p");
+
+	var left = document.createElement("span");
+	left.innerHTML = "<";
+	
+	var right = document.createElement("span");
+	right.innerHTML = ">";
+
+	left.classList.add("left");
+	right.classList.add("right");
+
+	left.addEventListener("click", function(){
+		moveLeft(res, regex);
 	});
 
-	return highlightedText;
+	right.addEventListener("click", function(){
+		moveRight(res, regex);
+	});
+
+	p.classList.add("pages");
+	p.innerHTML = "Page " + current +  " out of " + pages;
+	li.appendChild(left);
+	li.appendChild(right);
+	li.appendChild(p);
+	return li;
 }
 
-function createItem(num, value) {
-	deleteItems();
+function moveLeft(res, regex) {
+	console.log("left");
+}
 
-	var regex = new RegExp(value, "gi");
+function moveRight(res) {
+	console.log("right");
 
-	if(num !== null) {
-		num.forEach(function(card) {
-			var li = document.createElement("li");
-			li.tabIndex = 0;
+	var res = res.slice(5);
 
-			// event title
-			var h1 = document.createElement("h1");
-			var titleHighlight = highlightMatches(regex, card.eventTitle);
+	var items = document.querySelector("#suggestions").children;
+	console.log("items");
+	console.log(items.length);
 
-			h1.innerHTML = titleHighlight;
-
-			// event text
-			var p = document.createElement("p");
-			var substr = card.eventText.substring(0, 155) + "...";
-			var txtHighlight = highlightMatches(regex, substr)
-			p.innerHTML = txtHighlight;
-
-			// add title & text to li
-			li.appendChild(h1);
-			li.appendChild(p);
-			suggestions.appendChild(li);
-		})	
+	// compare size of remaining items to current items and delete extra lis
+	if(res.length < 5) {
+		var del = 5 - res.length;
+		console.log("del")
+		console.log(del);
 	}
+
+	for(var i = 0; i < del; i++) {
+		console.log("deleting li");
+		console.log(items[4 - i]);
+		items[4-i].parentNode.removeChild(items[4-i]);
+	}
+
+	res.forEach(function(card, i){
+		var li = items[i].children;
+		li[0].innerHTML = card.eventTitle;
+
+		if(li[1].outerHTML.indexOf("pre") !== -1) {
+			li[1].innerHTML = card.precondition.substring(0,30);
+			li[2].innerHTML = card.eventText.substring(0,155);
+		} else {
+			li[1].innerHTML = card.eventText.substring(0,155);
+		}
+	});
 }
 
 function deleteItems() {
@@ -42,8 +73,93 @@ function deleteItems() {
 	}
 }
 
+function highlightMatches(regex, str){
+	var highlightedText =  str.replace(regex, function(match) {
+		return `<span class="highlight">${match}</span>`;
+	});
+
+	return highlightedText;
+}
+
+function createTitle(regex, str) {
+	var h1 = document.createElement("h1");
+	h1.classList.add("title");
+
+	var titleHighlight = highlightMatches(regex, str);
+	h1.innerHTML = titleHighlight;
+
+	return h1;
+}
+
+function createPre(regex, str) {
+	var p = document.createElement("p");
+	p.classList.add("pre");
+
+	var preSub = str.substring(0, 30) + "...";
+	var preHighlight = highlightMatches(regex, preSub);
+	p.innerHTML = preHighlight;
+
+	return p;
+}
+
+function createTxt(regex, str) {
+	var p = document.createElement("p");
+	p.classList.add("txt");
+
+	var textSub = str.substring(0, 155) + "...";
+	var txtHighlight = highlightMatches(regex, textSub);
+	p.innerHTML = txtHighlight;
+
+	return p;
+}
+
+function createItems(res, value) {
+	deleteItems();
+
+	if(res !== null) {
+		if(res.length > 4) {
+			// count num of pages (results / 5)
+			var pages = Math.ceil(res.length / 5);
+		}
+
+		var regex = new RegExp(value, "gi");
+
+		res.forEach(function(card) {
+			if(suggestions.childElementCount > 4) {
+				return;
+			}
+
+			var li = document.createElement("li");
+			li.tabIndex = 0;
+
+			// create & highlight event title -------------------
+			var title = createTitle(regex, card.eventTitle);
+			li.appendChild(title);
+
+			// create & highlight precondition text -------------------
+			if(card.precondition) {
+				var pre = createPre(regex, card.precondition);
+				li.appendChild(pre);
+			}
+
+			// create & highlight discard condition text -------------------
+
+			// create & highlight event text -------------------
+			var txt = createTxt(regex, card.eventText);
+			li.appendChild(txt);
+
+			// add lis to dropdown
+			suggestions.appendChild(li);
+		});
+
+		if(pages) {
+			var nav = buildNav(res, regex, pages);
+			suggestions.appendChild(nav);
+		}
+	}
+}
+
 function displayMatches() {
-	
 	if(typeof this.value !== "undefined") {
 		var value = this.value.trim();
 		var request = new XMLHttpRequest();
@@ -53,11 +169,7 @@ function displayMatches() {
 		request.onload = function() {
 			if(this.status === 200) {
 				var res = this.response;
-				// add styled li using response data to create card previews
-				createItem(res, value);
-				// highlightItems(value);
-				// move card render logic to client side
-					// render card when its li is selected
+				createItems(res, value);
 			} else if(this.status === 404) {
 				console.log("Error occurred")
 			}
@@ -91,4 +203,5 @@ document.addEventListener("click", function(){
 //	1. enable suggestions to be navigated with arrow key
 // 	2. highlight relevant text
 // 		2a. expand this to include more than just event title & event text
+// 		2b. search entire card for relevant text, display snippet
 //	3. make selecting a suggestion (click or enter) render the card

@@ -93,8 +93,7 @@ ul {
 li {
 	list-style: none;
 	background-color: rgba(178,151,114,1);
-	opacity: 0.85;
-	/*background-color: rgba(150,120,96,0.9);*/
+	/*opacity: 0.85;*/
 	transition: opacity 0.20s ease-in;
 	margin: 0 auto;
 	padding: 2%;
@@ -104,9 +103,8 @@ li {
 }
 
 li:focus {
-	opacity: 1;
-	outline-color: rgba(150,120,96,0.9);
-	/*background-color: rgba(178,151,114,1);*/
+	/* placeholder outline color */
+	outline-color: rgba(0,0,255,1);
 }
 
 li h1 {
@@ -121,8 +119,34 @@ li p {
 	margin: 0;
 }
 
+/* ---- Card highlighting and suggestion styles ---- */
+
+.title {
+
+}
+
+.pre {
+	font-weight: bold;
+}
+
+.txt {
+
+}
+
 .highlight {
 	background-color: rgb(255, 251, 204);
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.pages {
+	text-align: center;
 }
 
 /* ----- General Card Settings -----*/

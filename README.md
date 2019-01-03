@@ -44,14 +44,23 @@ TODO:
 		* ~~Blank-FP-Card-4 (remove white background on card #)~~
 		* ~~Blank-Shadow-Card-4 (need to move right slightly)~~
 * __Search feature__
-	* create search function to find card titles in DB
+	* ~~create search function to find card titles in DB~~
 		* ensure card type icons are set
 		* ~~ensure correct card bg and card size are chosed~~
 	* ~~enable fuzzy searching~~
 	* enable all text fields to be queried, not just card titles
-* __Type-ahead & suggestions__
-	* get basic type-ahead feature to work
-	* ensure search function and type-ahead searchs multiple parts of a card for a keyword, not just event title
+		* ~~title~~
+		* ~~text~~
+		* ~~precondition~~
+		* discard condition
+		* search by faction ("shadow, free peoples, fp, free people, etc")
+	* enable page navigation on several results
+		* enable page counter
+		* move left
+		* ~~move right~~
+		* highlight query on new suggestions
+* __Polish__
+	* dry up code completely
 	* ensure type-ahead suggestions can be navigated and selected with arrow keys + enter
 * __Data Entry__
 	* enter all 100+ cards into the system (might have to do this manually)
