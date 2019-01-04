@@ -55,10 +55,11 @@ TODO:
 		* discard condition
 		* search by faction ("shadow, free peoples, fp, free people, etc")
 	* enable page navigation on several results
-		* enable page counter
-		* move left
+		* ~~enable page counter~~
+		* ~~move left~~
 		* ~~move right~~
-		* highlight query on new suggestions
+		* ~~highlight query on new suggestions~~
+	* render card when selected
 * __Polish__
 	* dry up code completely
 	* ensure type-ahead suggestions can be navigated and selected with arrow keys + enter
