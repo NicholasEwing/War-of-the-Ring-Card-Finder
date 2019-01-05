@@ -1,94 +1,118 @@
-function buildLis(arr, regex, replace=false) {
-	arr.forEach(function(card, i){
-		if(suggestions.childElementCount > 4 && !replace) {
-			return;
-		}
+// TODO: Ensure nav bar doesn't highlight on hover
+// and that nav bar is not selectable by tab
 
-		var li = document.createElement("li");
-		li.tabIndex = 0;
+// TODO:
+//	1. enable suggestions to be navigated with arrow key
+// 	2. highlight relevant text
+// 		2a. expand this to include more than just event title & event text
+// 		2b. search entire card for relevant text, display snippet
+//	3. make selecting a suggestion (click or enter) render the card
 
-		// create & highlight event title -------------------
-		var title = createTitle(regex, card.eventTitle);
-		li.appendChild(title);
+function displayCard(card) {
+	console.log(card);
+	// TODO: DRY the heck out of this code
 
-		// create & highlight precondition text -------------------
-		if(card.precondition) {
-			var pre = createPre(regex, card.precondition);
-			li.appendChild(pre);
-		}
+	var cardDiv = document.querySelector(".card");
 
-		// create & highlight discard condition text -------------------
-
-		// create & highlight event text -------------------
-		var txt = createTxt(regex, card.eventText);
-		li.appendChild(txt);
-
-		// add new lis to dropdown
-		if(replace) {
-			suggestions.replaceChild(li, suggestions.children[i]);
-		} else {
-			suggestions.appendChild(li);
-		}
-	});
-}
-
-function buildNav(res, regex, pages) {
-	// create pages with 5 cards on each
-	var pageArr = [];
-	for(var i = 0; i < res.length; i+=5) {
-		pageArr.push(res.slice(i, i+5));
+	// TODO: modify and reuse the "deleteItems" function with an argument for parentNode
+	// delete current card
+	while(cardDiv.firstChild) {
+		cardDiv.removeChild(cardDiv.firstChild);
 	}
 
-	var currentPage = 0;
-	var li = document.createElement("li");
-	var p = document.createElement("p");
+	// change card bg
+	// div: change faction class, change cardSize class "ex: *shadow*-*4*"
+	var oldClass = cardDiv.classList.item(1);
+	var newClass = `${card.faction}-${card.cardSize}`;
+	cardDiv.classList.replace(oldClass, newClass);
 
-	var left = document.createElement("span");
-	left.innerHTML = "";
-	
-	var right = document.createElement("span");
-	right.innerHTML = ">";
+	console.log(cardDiv);
 
-	left.classList.add("left");
-	right.classList.add("right");
+	// h1: change event title innerText
+	var eventTitle = document.createElement("h1");
+	eventTitle.classList.add("event-title");
+	eventTitle.innerText = card.eventTitle;
+	cardDiv.appendChild(eventTitle);
 
-	left.addEventListener("click", function(){
-		if(currentPage === 0) {
-			return;
-		}
-		currentPage--;
-		p.innerHTML = "Page " + (currentPage+1) +  " out of " + pages;
-		moveLeft(pageArr, currentPage, regex);
-	});
+	// EVENT SECTION --------------------------------
 
-	right.addEventListener("click", function(){
-		currentPage++;
-		p.innerHTML = "Page " + (currentPage+1) +  " out of " + pages;
+	// div event-box:, change class faction "ex: event-box-*shadow*"
+	var eventBox = document.createElement("div"); 
+	eventBox.classList.add(`event-box-${card.faction}`);
+	cardDiv.appendChild(eventBox);
 
-		if(currentPage > 0) {
-			left.innerHTML = "<";
-		}
+	// if card precondition
+	if(card.precondition) {
+		// create p tag with class "event-precondition"
+		var precondition = document.createElement("p");
+		precondition.classList.add("event-precondition");
+		// add innerText
+		precondition.innerText = card.precondition;
+		
+		eventBox.appendChild(precondition);
+	}
 
-		if(currentPage === pages-1) {
-			right.innerHTML = "";
-		}
-		moveRight(pageArr, currentPage, regex);
-	});
 
-	p.classList.add("pages");
-	p.innerHTML = "Page " + (currentPage+1) +  " out of " + pages;
-	li.appendChild(left);
-	li.appendChild(right);
-	li.appendChild(p);
-	return li;
-}
+	// p: change event-text innerText
+	var eventText = document.createElement("p");
+	eventText.classList.add("event-text");
+	eventText.innerHTML = card.eventText;
 
-function moveLeft(pageArr, page, regex) {
-	buildLis(pageArr[page], regex, true);
-}
+	eventBox.appendChild(eventText);
 
-function moveRight(pageArr, page, regex) {
-	buildLis(pageArr[page], regex, true);
+	// TODO: Cut these images in photoshop so I can finish this part
+	// if card has specialHuntTileImg
+		// create img tag with class "special-hunt-tile-img"
+		// link to correct href img tile
+
+	// if card has discardCondition
+	if(card.discardCondition) {
+		// create p tag with class "discard-condition"
+		var discardCondition = document.createElement("p");
+		discardCondition.classList.add("discard-condition");
+		// add innerText
+		discardCondition.innerText = card.discardCondition;
+		
+		eventBox.appendChild(discardCondition);
+	}
+
+	// COMBAT SECTION --------------------------------
+
+	// div: change class faction and cardsize "ex: combat-box-*shadow* box-*4*"
+	var combatBox = document.createElement("div");
+	combatBox.classList.add(`combat-box-${card.faction}`);
+	combatBox.classList.add(`box-${card.cardSize}`);
+	cardDiv.appendChild(combatBox);
+
+	// h1: change combat title
+	var combatTitle = document.createElement("h1");
+	combatTitle.classList.add("combat-title");
+	combatTitle.innerText = card.combatTitle;
+
+	combatBox.appendChild(combatTitle);
+
+	// p: change combat text
+	var combatText = document.createElement("p");
+	combatText.classList.add("combat-text");
+	combatText.innerText = card.combatText;
+
+	combatBox.appendChild(combatText);
+
+	// BOTTOM TEXT -----------------------------------
+
+	// p: change initative number
+	var initiativeNumber = document.createElement("p");
+	initiativeNumber.classList.add("initiative-number");
+	initiativeNumber.innerText = card.initiativeNumber;
+
+	cardDiv.appendChild(initiativeNumber);
+
+	// p: change card number
+	var cardNumber = document.createElement("p");
+	cardNumber.classList.add("card-number");
+	cardNumber.innerText = card.cardNumber;
+
+	cardDiv.appendChild(cardNumber);
 }
 
 function deleteItems() {
@@ -96,6 +120,8 @@ function deleteItems() {
 		suggestions.removeChild(suggestions.firstChild);
 	}
 }
+
+// -------- Functions used to create suggestion dropdown --------
 
 function highlightMatches(regex, str){
 	var highlightedText =  str.replace(regex, function(match) {
@@ -181,6 +207,118 @@ function displayMatches() {
 	}
 }
 
+function buildLis(arr, regex, replace=false) {
+	arr.forEach(function(card, i){
+		if(suggestions.childElementCount > 4 && !replace) {
+			return;
+		}
+
+		var a = document.createElement("a");
+		a.href = "#";
+
+		a.addEventListener("click", function(){
+			deleteItems();
+			displayCard(card);
+		});
+
+		var li = document.createElement("li");
+
+		// create & highlight event title -------------------
+		var title = createTitle(regex, card.eventTitle);
+		li.appendChild(title);
+
+		// create & highlight precondition text -------------------
+		if(card.precondition) {
+			var pre = createPre(regex, card.precondition);
+			li.appendChild(pre);
+		}
+
+		// create & highlight discard condition text -------------------
+
+		// create & highlight event text -------------------
+		var txt = createTxt(regex, card.eventText);
+		li.appendChild(txt);
+
+		a.appendChild(li);
+
+		// add new lis to dropdown
+		if(replace) {
+			suggestions.replaceChild(a, suggestions.children[i]);
+		} else {
+			suggestions.appendChild(a);
+		}
+	});
+}
+
+function buildNav(res, regex, pages) {
+	// create pages with 5 cards on each
+	var pageArr = [];
+	for(var i = 0; i < res.length; i+=5) {
+		pageArr.push(res.slice(i, i+5));
+	}
+
+	var currentPage = 0;
+	var li = document.createElement("li");
+	var p = document.createElement("p");
+
+	var left = document.createElement("span");
+	left.innerHTML = "";
+	
+	var right = document.createElement("span");
+	right.innerHTML = ">";
+
+	left.classList.add("left");
+	right.classList.add("right");
+
+	left.addEventListener("click", function(){
+		if(currentPage === 0) {
+			return;
+		}
+
+		if(currentPage <= pages-1) {
+			right.innerHTML = ">";
+		}
+
+		currentPage--;
+		p.innerHTML = "Page " + (currentPage+1) +  " out of " + pages;
+		moveLeft(pageArr, currentPage, regex);
+	});
+
+	right.addEventListener("click", function(){
+		currentPage++;
+
+		p.innerHTML = "Page " + (currentPage+1) +  " out of " + pages;
+
+		if(currentPage > 0) {
+			left.innerHTML = "<";
+		}
+
+		if(currentPage === pages-1) {
+			right.innerHTML = "";
+		}
+
+
+		moveRight(pageArr, currentPage, regex);
+	});
+
+	p.classList.add("pages");
+	p.innerHTML = "Page " + (currentPage+1) +  " out of " + pages;
+	li.appendChild(left);
+	li.appendChild(right);
+	li.appendChild(p);
+	return li;
+}
+
+function moveLeft(pageArr, page, regex) {
+	buildLis(pageArr[page], regex, true);
+}
+
+function moveRight(pageArr, page, regex) {
+	buildLis(pageArr[page], regex, true);
+}
+
+// --------------------------------------------------
+
 var searchInput = document.querySelector("input");
 var suggestions = document.querySelector("#suggestions");
 
@@ -196,10 +334,3 @@ document.addEventListener("click", function(){
 		deleteItems();
 	}
 });
-
-// TODO:
-//	1. enable suggestions to be navigated with arrow key
-// 	2. highlight relevant text
-// 		2a. expand this to include more than just event title & event text
-// 		2b. search entire card for relevant text, display snippet
-//	3. make selecting a suggestion (click or enter) render the card

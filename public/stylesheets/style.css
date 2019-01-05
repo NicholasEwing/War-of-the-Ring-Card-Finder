@@ -102,10 +102,17 @@ li {
 	border-bottom: 1px solid rgba(0,0,0,0.15);
 }
 
-li:focus {
-	/* placeholder outline color */
-	outline-color: rgba(0,0,255,1);
+/*place holder hover / focus effects*/
+
+li:hover {
+	background-color: pink;
 }
+
+a:focus > li {
+	background-color: pink;
+}
+
+/* ---- ---------------------------*/
 
 li h1 {
 	text-align: left;
@@ -147,6 +154,11 @@ li p {
 
 .pages {
 	text-align: center;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
 }
 
 /* ----- General Card Settings -----*/

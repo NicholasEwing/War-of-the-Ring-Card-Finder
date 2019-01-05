@@ -59,10 +59,15 @@ TODO:
 		* ~~move left~~
 		* ~~move right~~
 		* ~~highlight query on new suggestions~~
-	* render card when selected
+	* ~~render card when selected~~
 * __Polish__
+	* show snippet of relevant matched text on suggestions, not just starting text
+	* change suggestion highlight color and bg based on faction (red for shadow, blue for free peoples)
+	* don't make nav bar highlight on hover, don't allow nav bar focus
+	* add card icon (muster / army / character) on suggestion lis
 	* dry up code completely
 	* ensure type-ahead suggestions can be navigated and selected with arrow keys + enter
+	* check if it's safer to use innerText instead of innerHTML for text change
 * __Data Entry__
 	* enter all 100+ cards into the system (might have to do this manually)
 	* add improved text for all cards
