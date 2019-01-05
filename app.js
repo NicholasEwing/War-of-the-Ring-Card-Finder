@@ -11,6 +11,9 @@ const url = process.env.DATABASEURL || `mongodb+srv://arthix:${process.env.MONGO
 mongoose.set("useCreateIndex", true);
 mongoose.connect(url, {useNewUrlParser: true});
 
+// favicon
+app.use('/favicon.ico', express.static('public/images/favicon.ico'));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
