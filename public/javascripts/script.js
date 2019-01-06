@@ -9,7 +9,6 @@
 //	3. make selecting a suggestion (click or enter) render the card
 
 function displayCard(card) {
-	console.log(card);
 	// TODO: DRY the heck out of this code
 
 	var cardDiv = document.querySelector(".card");
@@ -30,8 +29,6 @@ function displayCard(card) {
 		var newClass = `${card.faction}-${card.cardSize}`;
 	}
 	cardDiv.classList.replace(oldClass, newClass);
-
-	console.log(cardDiv);
 
 	// h1: change event title innerText
 	var eventTitle = document.createElement("h1");
@@ -240,6 +237,17 @@ function buildLis(arr, regex, replace=false) {
 			displayCard(card);
 		});
 
+		// prevents arrow key nav and mouseover from
+		// creating multiple hover effects
+		a.addEventListener("mouseenter", function(){
+			a.focus();
+		})
+
+		a.addEventListener("mouseleave", function(){
+			a.blur();
+		})
+
+
 		var li = document.createElement("li");
 
 		// create & highlight event title -------------------
@@ -316,7 +324,6 @@ function buildNav(res, regex, pages) {
 			right.innerHTML = "";
 		}
 
-
 		moveRight(pageArr, currentPage, regex);
 	});
 
@@ -342,7 +349,14 @@ var searchInput = document.querySelector("input");
 var suggestions = document.querySelector("#suggestions");
 
 // display matches when user types in the search bar
+
+// TODO: Prevent this from firing when using arrow keys!
 searchInput.addEventListener("keyup", displayMatches);
+
+// this isn't triggering displayMatches() for some reason
+// searchInput.addEventListener("keyup", function(){
+// 	displayMatches();
+// });
 
 // display matches when user focuses on search bar
 searchInput.addEventListener("focus", displayMatches);
@@ -351,5 +365,40 @@ searchInput.addEventListener("focus", displayMatches);
 document.addEventListener("click", function(){
 	if(!(event.target === searchInput || suggestions.contains(event.target))) {
 		deleteItems();
+	}
+});
+
+// allows up and down arrow key navigation on suggestions
+document.addEventListener("keydown", function(event){
+
+	// down arrow navigation
+	if(event.keyCode === 40 && suggestions.children) {
+		event.preventDefault();
+		var next = document.activeElement.nextSibling;
+		if(next === null || next.nodeName === "#text") {
+			suggestions.firstChild.focus();
+		} else {
+			next.focus();
+		}
+	}
+
+	// up arrow navigation
+	if(event.keyCode === 38 && suggestions.children) {
+		event.preventDefault();
+		var prev = document.activeElement.previousSibling;
+		if(prev === null || prev.nodeName === "#text") {
+			return;
+		} else {
+			prev.focus();
+		}
+	}
+
+	// left arrow navigation (move page left)
+
+	// right arrow navigation (move page right)
+	if(event.keyCode === 39) {
+		event.preventDefault();
+		var nextPageBtn = document.querySelector(".right");
+		nextPageBtn.click();
 	}
 });

@@ -17,7 +17,10 @@ module.exports = {
 								{eventTitle : regex},
 								{eventText : regex},
 								{precondition : regex},
-								{faction: regex}
+								{discardCondition : regex},
+								{combatTitle : regex},
+								{combatPrecondition : regex},
+								{combatText : regex}
 							]});
 				}
 				res.json(results);

@@ -52,7 +52,8 @@ TODO:
 		* ~~title~~
 		* ~~text~~
 		* ~~precondition~~
-		* discard condition
+		* ~~discard condition~~
+		* ~~all combat text~~
 		* ~~search by faction ("shadow, free peoples, fp, free people, etc")~~
 	* enable page navigation on several results
 		* ~~enable page counter~~
@@ -70,6 +71,8 @@ TODO:
 	* dry up code completely
 	* find way to preload bg images and cache them to prevent white flash on initial search
 	* ensure type-ahead suggestions can be navigated and selected with arrow keys + enter (MAKE THIS OBVIOUS TO USER)
+		* ~~up and down arrows work~~
+		* left and right arrows navigate pages
 	* check if it's safer to use innerText instead of innerHTML for text change
 * __Data Entry__
 	* enter all 100+ cards into the system (might have to do this manually)

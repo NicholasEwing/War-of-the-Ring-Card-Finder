@@ -103,10 +103,6 @@ li {
 
 /*place holder hover / focus effects*/
 
-li:hover {
-	background-color: pink;
-}
-
 a:focus > li {
 	background-color: pink;
 }
