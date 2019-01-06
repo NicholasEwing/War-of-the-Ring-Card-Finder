@@ -53,7 +53,7 @@ TODO:
 		* ~~text~~
 		* ~~precondition~~
 		* discard condition
-		* search by faction ("shadow, free peoples, fp, free people, etc")
+		* ~~search by faction ("shadow, free peoples, fp, free people, etc")~~
 	* enable page navigation on several results
 		* ~~enable page counter~~
 		* ~~move left~~
@@ -61,12 +61,15 @@ TODO:
 		* ~~highlight query on new suggestions~~
 	* ~~render card when selected~~
 * __Polish__
+	* ~~move combat init number down slightly~~
 	* show snippet of relevant matched text on suggestions, not just starting text
 	* change suggestion highlight color and bg based on faction (red for shadow, blue for free peoples)
 	* don't make nav bar highlight on hover, don't allow nav bar focus
 	* add card icon (muster / army / character) on suggestion lis
+	* allow card flip to show relevant cardback
 	* dry up code completely
-	* ensure type-ahead suggestions can be navigated and selected with arrow keys + enter
+	* find way to preload bg images and cache them to prevent white flash on initial search
+	* ensure type-ahead suggestions can be navigated and selected with arrow keys + enter (MAKE THIS OBVIOUS TO USER)
 	* check if it's safer to use innerText instead of innerHTML for text change
 * __Data Entry__
 	* enter all 100+ cards into the system (might have to do this manually)

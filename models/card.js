@@ -6,7 +6,7 @@ const cardSchema = new mongoose.Schema({
 	eventTitle: {type: String, unique: true, required: true},
 	cardSize: {type: Number, required: true},
 	deckSource: {type: String, required: true}, // options: Character Deck, Strategy Deck
-	faction: {type: String, required: true}, // options: Shadow, Free Peoples
+	faction: {type: String, required: true}, // options: shadow, fp
 	type: {type: String, required: true}, // types: Character, Army, Muster
 	precondition: String,
 	improvedPrecondition: String,

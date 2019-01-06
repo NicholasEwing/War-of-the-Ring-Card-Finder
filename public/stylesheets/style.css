@@ -93,7 +93,6 @@ ul {
 li {
 	list-style: none;
 	background-color: rgba(178,151,114,1);
-	/*opacity: 0.85;*/
 	transition: opacity 0.20s ease-in;
 	margin: 0 auto;
 	padding: 2%;
@@ -197,22 +196,22 @@ a {
 	background-size: auto 100%;
 }
 
-.fp-1 {
+.free-peoples-1 {
 	background: url(/images/card-art/blanks/Blank-FP-Card-1.jpg);
 	background-size: auto 100%;
 }
 
-.fp-2 {
+.free-peoples-2 {
 	background: url(/images/card-art/blanks/Blank-FP-Card-2.jpg);
 	background-size: auto 100%;
 }
 
-.fp-3 {
+.free-peoples-3 {
 	background: url(/images/card-art/blanks/Blank-FP-Card-3.jpg);
 	background-size: auto 100%;
 }
 
-.fp-4 {
+.free-peoples-4 {
 	background: url(/images/card-art/blanks/Blank-FP-Card-4.jpg);
 	background-size: auto 100%;
 }
@@ -230,12 +229,12 @@ a {
 
 /* -------- Event Section --------*/
 
-.event-box-fp p, 
+.event-box-free-peoples p, 
 .event-box-shadow p {
 	text-align: left;
 }
 
-.event-box-fp {
+.event-box-free-peoples {
 	position: absolute;
 	top: 14%;
 	width: 315px;
@@ -266,14 +265,14 @@ a {
 
 .special-hunt-tile-img {
 	position: absolute;
-	top: 25%;
+	top: 40%;
 	left: 50%;
 	margin-left: -5rem;
 }
 
 /* -------- Combat Section --------*/
 
-.combat-box-fp {
+.combat-box-free-peoples {
 	width: 325px;
 	height: 200px;
 	text-align: right;
@@ -326,7 +325,7 @@ a {
 .initiative-number {
 	position: absolute;
 	font-weight: bold;
-	top: 88.5%;
+	top: 89.5%;
 	left: 11.5%;
 } 
 

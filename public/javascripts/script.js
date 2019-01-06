@@ -23,7 +23,12 @@ function displayCard(card) {
 	// change card bg
 	// div: change faction class, change cardSize class "ex: *shadow*-*4*"
 	var oldClass = cardDiv.classList.item(1);
-	var newClass = `${card.faction}-${card.cardSize}`;
+	if(card.faction === "free peoples") {
+		var fp = card.faction.replace(" ", "-")
+		var newClass = fp + "-" + card.cardSize;
+	} else {
+		var newClass = `${card.faction}-${card.cardSize}`;
+	}
 	cardDiv.classList.replace(oldClass, newClass);
 
 	console.log(cardDiv);
@@ -37,8 +42,12 @@ function displayCard(card) {
 	// EVENT SECTION --------------------------------
 
 	// div event-box:, change class faction "ex: event-box-*shadow*"
-	var eventBox = document.createElement("div"); 
-	eventBox.classList.add(`event-box-${card.faction}`);
+	var eventBox = document.createElement("div");
+	if(card.faction === "free peoples") {
+		eventBox.classList.add(`event-box-${fp}`);
+	} else {
+		eventBox.classList.add(`event-box-${card.faction}`);
+	}
 	cardDiv.appendChild(eventBox);
 
 	// if card precondition
@@ -62,6 +71,12 @@ function displayCard(card) {
 
 	// TODO: Cut these images in photoshop so I can finish this part
 	// if card has specialHuntTileImg
+	if(card.specialHuntTileImg) {
+		var specialHuntTileImg = document.createElement("img");
+		specialHuntTileImg.classList.add("special-hunt-tile-img");
+		specialHuntTileImg.src = "/images/hunt-tiles/minus1.jpg";
+		eventBox.appendChild(specialHuntTileImg);
+	}
 		// create img tag with class "special-hunt-tile-img"
 		// link to correct href img tile
 
@@ -80,7 +95,11 @@ function displayCard(card) {
 
 	// div: change class faction and cardsize "ex: combat-box-*shadow* box-*4*"
 	var combatBox = document.createElement("div");
-	combatBox.classList.add(`combat-box-${card.faction}`);
+	if(card.faction === "free peoples") {
+		combatBox.classList.add(`combat-box-${fp}`);
+	} else {
+		combatBox.classList.add(`combat-box-${card.faction}`);
+	}
 	combatBox.classList.add(`box-${card.cardSize}`);
 	cardDiv.appendChild(combatBox);
 

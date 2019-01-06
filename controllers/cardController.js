@@ -6,18 +6,25 @@ module.exports = {
 		try {
 			if(req.query.search) {
 				const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-				const results = await Card.find(
-					{$or: [
-						{eventTitle : regex},
-						{eventText : regex},
-						{precondition : regex}
-					]});
+				console.log(regex);
+				let results;
+				// find all Free Peoples cards if using acronym "fp"
+				if(req.query.search === "fp") {
+					results = await Card.find({faction: "free peoples"});
+				} else {
+					results = await Card.find(
+							{$or: [
+								{eventTitle : regex},
+								{eventText : regex},
+								{precondition : regex},
+								{faction: regex}
+							]});
+				}
 				res.json(results);
 			} else {
 				const card = await Card.findOne({eventTitle : "Balrog of Moria"});
 				res.render("index", {card: card});
 			}
-
 		} catch(err) {
 			res.send("Something went wrong!");
 			console.log(err);
