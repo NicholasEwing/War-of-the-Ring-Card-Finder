@@ -25,7 +25,7 @@ module.exports = {
 				}
 				res.json(results);
 			} else {
-				const card = await Card.findOne({eventTitle : "Balrog of Moria"});
+				const card = await Card.findOne({eventTitle : "The Last Battle"});
 				res.render("index", {card: card});
 			}
 		} catch(err) {

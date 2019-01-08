@@ -30,6 +30,17 @@ function displayCard(card) {
 	}
 	cardDiv.classList.replace(oldClass, newClass);
 
+	// add card type icon
+	if(card.faction === "free peoples") {
+		var iconSrc = `FP-${card.type}-Icon.png`;
+	} else {
+		var iconSrc = `${card.faction}-${card.type}-Icon.png`
+	}
+	var typeIcon = document.createElement("img");
+	typeIcon.classList.add("type-icon");
+	typeIcon.src = `/images/icons/${iconSrc}`;
+	cardDiv.appendChild(typeIcon);
+
 	// h1: change event title innerText
 	var eventTitle = document.createElement("h1");
 	eventTitle.classList.add("event-title");
@@ -65,17 +76,6 @@ function displayCard(card) {
 	eventText.innerHTML = card.eventText;
 
 	eventBox.appendChild(eventText);
-
-	// TODO: Cut these images in photoshop so I can finish this part
-	// if card has specialHuntTileImg
-	if(card.specialHuntTileImg) {
-		var specialHuntTileImg = document.createElement("img");
-		specialHuntTileImg.classList.add("special-hunt-tile-img");
-		specialHuntTileImg.src = "/images/hunt-tiles/minus1.jpg";
-		eventBox.appendChild(specialHuntTileImg);
-	}
-		// create img tag with class "special-hunt-tile-img"
-		// link to correct href img tile
 
 	// if card has discardCondition
 	if(card.discardCondition) {
@@ -200,8 +200,8 @@ function createItems(res, value) {
 }
 
 function displayMatches() {
-	if(typeof this.value !== "undefined") {
-		var value = this.value.trim();
+	var value = searchInput.value.trim();
+	if(typeof value !== "undefined") {
 		var request = new XMLHttpRequest();
 		request.responseType = "json";
 		request.open("GET", "/?search=" + value);
@@ -307,11 +307,20 @@ function buildNav(res, regex, pages) {
 		}
 
 		currentPage--;
+
+		if(currentPage === 0) {
+			left.innerHTML = "";
+		}
+
 		p.innerHTML = "Page " + (currentPage+1) +  " out of " + pages;
 		moveLeft(pageArr, currentPage, regex);
 	});
 
 	right.addEventListener("click", function(){
+		if(currentPage === pages-1) {
+			return;
+		}
+
 		currentPage++;
 
 		p.innerHTML = "Page " + (currentPage+1) +  " out of " + pages;
@@ -349,14 +358,12 @@ var searchInput = document.querySelector("input");
 var suggestions = document.querySelector("#suggestions");
 
 // display matches when user types in the search bar
-
-// TODO: Prevent this from firing when using arrow keys!
-searchInput.addEventListener("keyup", displayMatches);
-
-// this isn't triggering displayMatches() for some reason
-// searchInput.addEventListener("keyup", function(){
-// 	displayMatches();
-// });
+searchInput.addEventListener("keyup", function(event){
+	if(event.keyCode === 40 || event.keyCode === 39 || event.keyCode === 38 || event.keyCode === 37) {
+		return;
+	}
+	displayMatches();
+});
 
 // display matches when user focuses on search bar
 searchInput.addEventListener("focus", displayMatches);
@@ -371,8 +378,7 @@ document.addEventListener("click", function(){
 // allows up and down arrow key navigation on suggestions
 document.addEventListener("keydown", function(event){
 
-	// down arrow navigation
-	if(event.keyCode === 40 && suggestions.children) {
+	if(event.keyCode === 40 && suggestions.children.length > 0) {
 		event.preventDefault();
 		var next = document.activeElement.nextSibling;
 		if(next === null || next.nodeName === "#text") {
@@ -383,7 +389,7 @@ document.addEventListener("keydown", function(event){
 	}
 
 	// up arrow navigation
-	if(event.keyCode === 38 && suggestions.children) {
+	if(event.keyCode === 38 && suggestions.children.length > 0) {
 		event.preventDefault();
 		var prev = document.activeElement.previousSibling;
 		if(prev === null || prev.nodeName === "#text") {
@@ -394,6 +400,11 @@ document.addEventListener("keydown", function(event){
 	}
 
 	// left arrow navigation (move page left)
+	if(event.keyCode === 37) {
+		event.preventDefault();
+		var prevPageBtn = document.querySelector(".left");
+		prevPageBtn.click();
+	}
 
 	// right arrow navigation (move page right)
 	if(event.keyCode === 39) {

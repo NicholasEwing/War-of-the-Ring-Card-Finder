@@ -46,6 +46,8 @@ TODO:
 * __Search feature__
 	* ~~create search function to find card titles in DB~~
 		* ensure card type icons are set
+			* ~~free peoples~~
+			* shadow
 		* ~~ensure correct card bg and card size are chosed~~
 	* ~~enable fuzzy searching~~
 	* enable all text fields to be queried, not just card titles
@@ -63,16 +65,15 @@ TODO:
 	* ~~render card when selected~~
 * __Polish__
 	* ~~move combat init number down slightly~~
-	* show snippet of relevant matched text on suggestions, not just starting text
 	* change suggestion highlight color and bg based on faction (red for shadow, blue for free peoples)
-	* don't make nav bar highlight on hover, don't allow nav bar focus
+	* ~~don't make nav bar highlight on hover, don't allow nav bar focus~~
 	* add card icon (muster / army / character) on suggestion lis
 	* allow card flip to show relevant cardback
 	* dry up code completely
 	* find way to preload bg images and cache them to prevent white flash on initial search
-	* ensure type-ahead suggestions can be navigated and selected with arrow keys + enter (MAKE THIS OBVIOUS TO USER)
+	* ~~ensure type-ahead suggestions can be navigated and selected with arrow keys + enter~~
 		* ~~up and down arrows work~~
-		* left and right arrows navigate pages
+		* ~~left and right arrows navigate pages~~
 	* check if it's safer to use innerText instead of innerHTML for text change
 * __Data Entry__
 	* enter all 100+ cards into the system (might have to do this manually)

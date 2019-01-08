@@ -212,6 +212,13 @@ a {
 	background-size: auto 100%;
 }
 
+.type-icon {
+	position: absolute;
+    right: 38.8px;
+    top: 39.7px;
+    height: 62.3px;
+}
+
 .event-text,
 .event-precondition,
 .discard-condition,
