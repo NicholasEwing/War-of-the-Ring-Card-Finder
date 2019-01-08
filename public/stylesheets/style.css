@@ -212,11 +212,18 @@ a {
 	background-size: auto 100%;
 }
 
-.type-icon {
+.type-icon-fp {
 	position: absolute;
-    right: 38.8px;
-    top: 39.7px;
-    height: 62.3px;
+    right: 37.7px;
+    top: 39.2px;
+    height: 63.3px;
+}
+
+.type-icon-shadow {
+	position: absolute;
+    right: 39.8px;
+    top: 37px;
+    height: 84px;
 }
 
 .event-text,

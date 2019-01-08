@@ -1,13 +1,3 @@
-// TODO: Ensure nav bar doesn't highlight on hover
-// and that nav bar is not selectable by tab
-
-// TODO:
-//	1. enable suggestions to be navigated with arrow key
-// 	2. highlight relevant text
-// 		2a. expand this to include more than just event title & event text
-// 		2b. search entire card for relevant text, display snippet
-//	3. make selecting a suggestion (click or enter) render the card
-
 function displayCard(card) {
 	// TODO: DRY the heck out of this code
 
@@ -33,11 +23,13 @@ function displayCard(card) {
 	// add card type icon
 	if(card.faction === "free peoples") {
 		var iconSrc = `FP-${card.type}-Icon.png`;
+		var imgClass = "type-icon-fp";
 	} else {
-		var iconSrc = `${card.faction}-${card.type}-Icon.png`
+		var iconSrc = `Shadow-${card.type}-Icon.png`
+		var imgClass = "type-icon-shadow";
 	}
 	var typeIcon = document.createElement("img");
-	typeIcon.classList.add("type-icon");
+	typeIcon.classList.add(imgClass);
 	typeIcon.src = `/images/icons/${iconSrc}`;
 	cardDiv.appendChild(typeIcon);
 
@@ -179,26 +171,6 @@ function createTxt(regex, str) {
 	return p;
 }
 
-function createItems(res, value) {
-	deleteItems();
-
-	if(res !== null) {
-		if(res.length > 4) {
-			// count num of pages (results / 5)
-			var pages = Math.ceil(res.length / 5);
-		}
-
-		var regex = new RegExp(value, "gi");
-
-		buildLis(res, regex);
-
-		if(pages) {
-			var nav = buildNav(res, regex, pages);
-			suggestions.appendChild(nav);
-		}
-	}
-}
-
 function displayMatches() {
 	var value = searchInput.value.trim();
 	if(typeof value !== "undefined") {
@@ -223,7 +195,32 @@ function displayMatches() {
 	}
 }
 
+function createItems(res, value) {
+	deleteItems();
+
+	if(res !== null) {
+		if(res.length > 4) {
+			// count num of pages (results / 5)
+			var pages = Math.ceil(res.length / 5);
+		}
+
+		var regex = new RegExp(value, "gi");
+
+		buildLis(res, regex);
+
+		if(pages) {
+			var nav = buildNav(res, regex, pages);
+			suggestions.appendChild(nav);
+		}
+	}
+}
+
 function buildLis(arr, regex, replace=false) {
+	var oldResults = suggestions.getElementsByTagName("A");
+	for (var i = 0; i < oldResults.length; i++) {
+		oldResults[i].remove()
+	}
+
 	arr.forEach(function(card, i){
 		if(suggestions.childElementCount > 4 && !replace) {
 			return;
@@ -269,12 +266,18 @@ function buildLis(arr, regex, replace=false) {
 		a.appendChild(li);
 
 		// add new lis to dropdown
-		if(replace) {
-			suggestions.replaceChild(a, suggestions.children[i]);
-		} else {
-			suggestions.appendChild(a);
-		}
+		suggestions.insertBefore(a, suggestions.childNodes[0]);
 	});
+
+	// handle leftovers when changing pages, might need to rework a lot of stuff
+	// wrap your head around why this fixes suggestions from stacking!
+	if(replace) {
+		var diff = (suggestions.getElementsByTagName("A").length - arr.length);
+		for (var i = 0; i < diff; i++) {
+			var leftover = suggestions.lastChild.previousSibling;
+			leftover.remove();
+		}
+	}
 }
 
 function buildNav(res, regex, pages) {

@@ -67,7 +67,8 @@ TODO:
 	* ~~move combat init number down slightly~~
 	* change suggestion highlight color and bg based on faction (red for shadow, blue for free peoples)
 	* ~~don't make nav bar highlight on hover, don't allow nav bar focus~~
-	* add card icon (muster / army / character) on suggestion lis
+	* ~~add card icon (muster / army / character) on suggestion lis~~
+		* need to fix some SUPER minor white space issue with shadow icons
 	* allow card flip to show relevant cardback
 	* dry up code completely
 	* find way to preload bg images and cache them to prevent white flash on initial search
