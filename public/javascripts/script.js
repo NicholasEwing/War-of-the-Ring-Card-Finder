@@ -1,175 +1,176 @@
-function displayCard(card) {
-	// TODO: DRY the heck out of this code
+// ----------------------------------------------------------------------------
+// Set up globals and event listeners
+// ----------------------------------------------------------------------------
 
+// TODO: get rid of globals
+
+// listener logic for flip card
+var listening = false;
+_listener = function() {
+	flipCard(card);
+}
+
+var suggestions = document.querySelector("#suggestions");
+var searchInput = document.querySelector("input");
+
+addSearchListeners();
+addArrowKeyListeners();
+
+// ---------------------------------------------------------------------------------
+// createCard() handles logic to create a new card when a suggestion is selected 
+// ---------------------------------------------------------------------------------
+
+function createCard(card) {
+	var elements = getCardElements();
+	var settings = getFactionSettings(card, elements);
+
+	flipBtnReset(card);
+	removeChildren(elements.cardDiv);
+	changeBg(settings, elements);
+	changeTypeIcon(settings, elements);
+	changeBoxSizes(settings, elements, card);
+	addCardText(elements, card);
+}
+
+function flipBtnReset(card) {
 	var cardDiv = document.querySelector(".card");
+	var flipBtn = document.querySelector(".flip-btn");
 
-	// TODO: modify and reuse the "deleteItems" function with an argument for parentNode
-	// delete current card
-	while(cardDiv.firstChild) {
-		cardDiv.removeChild(cardDiv.firstChild);
+	cardDiv.classList.remove("flip-left");
+	cardDiv.classList.remove("flip-right");
+	cardDiv.classList.remove("hide");
+	cardDiv.style.backgroundImage = "";
+	cardDiv.style.backgroundSize = "";
+
+	// clean up event handlers, this is super sloppy
+	// https://stackoverflow.com/questions/10000083/javascript-event-handler-with-parameters
+
+	if(!listening) {
+		listening = true;
+
+		_listener = function() {
+			flipCard(card);
+		}
+
+		flipBtn.addEventListener("click", _listener);
+	} else {
+		flipBtn.removeEventListener("click", _listener);
+
+		_listener = function() {
+			flipCard(card);
+		}
+
+		flipBtn.addEventListener("click", _listener);
+	}
+}
+
+function removeChildren(parentElement) {
+	while(parentElement.firstChild) {
+		parentElement.removeChild(parentElement.firstChild);
+	}
+}
+
+function getCardElements() {
+	var elements = {};
+
+	elements.cardDiv = document.querySelector(".card");
+	elements.eventBox = document.createElement("div"); 
+	elements.typeIcon = document.createElement("img");
+	elements.combatBox = document.createElement("div");
+
+	return elements
+}
+
+function getFactionSettings(card, elements) {
+	var eventBox 	= elements.eventBox;
+	var combatBox 	= elements.combatBox;
+	
+	var settings = {};
+
+	if(card.faction === "free peoples") {
+		settings.newClass 	= `fp-${card.cardSize}`;
+		settings.imgClass 	= "type-icon-fp";
+		settings.iconSrc	= `fp-${card.type}-Icon.png`;
+		eventBox.classList.add("event-box-free-peoples");
+		combatBox.classList.add("combat-box-free-peoples");
+	} else {
+		settings.newClass 	= `${card.faction}-${card.cardSize}`;
+		settings.imgClass 	= `type-icon-${card.faction}`;
+		settings.iconSrc 	= `${card.faction}-${card.type}-Icon.png`;
+		eventBox.classList.add(`event-box-${card.faction}`);
+		combatBox.classList.add(`combat-box-${card.faction}`);
 	}
 
-	// change card bg
-	// div: change faction class, change cardSize class "ex: *shadow*-*4*"
+	return settings;
+}
+
+function changeBg(settings, elements) {
+	var cardDiv = elements.cardDiv;
 	var oldClass = cardDiv.classList.item(1);
-	if(card.faction === "free peoples") {
-		var fp = card.faction.replace(" ", "-")
-		var newClass = fp + "-" + card.cardSize;
-	} else {
-		var newClass = `${card.faction}-${card.cardSize}`;
-	}
-	cardDiv.classList.replace(oldClass, newClass);
+	var newClass = settings.newClass;
 
-	// add card type icon
-	if(card.faction === "free peoples") {
-		var iconSrc = `FP-${card.type}-Icon.png`;
-		var imgClass = "type-icon-fp";
-	} else {
-		var iconSrc = `Shadow-${card.type}-Icon.png`
-		var imgClass = "type-icon-shadow";
-	}
-	var typeIcon = document.createElement("img");
+	cardDiv.classList.replace(oldClass, newClass);
+}
+
+function changeTypeIcon(settings, elements) {
+	var cardDiv = elements.cardDiv;
+	var typeIcon = elements.typeIcon;
+	var imgClass = settings.imgClass;
+	var iconSrc = settings.iconSrc;
+
 	typeIcon.classList.add(imgClass);
 	typeIcon.src = `/images/icons/${iconSrc}`;
 	cardDiv.appendChild(typeIcon);
+}
 
-	// h1: change event title innerText
-	var eventTitle = document.createElement("h1");
-	eventTitle.classList.add("event-title");
-	eventTitle.innerText = card.eventTitle;
-	cardDiv.appendChild(eventTitle);
+function changeBoxSizes(settings, elements, card) {
+	var cardDiv 	= elements.cardDiv;
+	var eventBox 	= elements.eventBox;
+	var combatBox 	= elements.combatBox;
 
-	// EVENT SECTION --------------------------------
-
-	// div event-box:, change class faction "ex: event-box-*shadow*"
-	var eventBox = document.createElement("div");
-	if(card.faction === "free peoples") {
-		eventBox.classList.add(`event-box-${fp}`);
-	} else {
-		eventBox.classList.add(`event-box-${card.faction}`);
-	}
 	cardDiv.appendChild(eventBox);
-
-	// if card precondition
-	if(card.precondition) {
-		// create p tag with class "event-precondition"
-		var precondition = document.createElement("p");
-		precondition.classList.add("event-precondition");
-		// add innerText
-		precondition.innerText = card.precondition;
-		
-		eventBox.appendChild(precondition);
-	}
-
-
-	// p: change event-text innerText
-	var eventText = document.createElement("p");
-	eventText.classList.add("event-text");
-	eventText.innerHTML = card.eventText;
-
-	eventBox.appendChild(eventText);
-
-	// if card has discardCondition
-	if(card.discardCondition) {
-		// create p tag with class "discard-condition"
-		var discardCondition = document.createElement("p");
-		discardCondition.classList.add("discard-condition");
-		// add innerText
-		discardCondition.innerText = card.discardCondition;
-		
-		eventBox.appendChild(discardCondition);
-	}
-
-	// COMBAT SECTION --------------------------------
-
-	// div: change class faction and cardsize "ex: combat-box-*shadow* box-*4*"
-	var combatBox = document.createElement("div");
-	if(card.faction === "free peoples") {
-		combatBox.classList.add(`combat-box-${fp}`);
-	} else {
-		combatBox.classList.add(`combat-box-${card.faction}`);
-	}
-	combatBox.classList.add(`box-${card.cardSize}`);
 	cardDiv.appendChild(combatBox);
-
-	// h1: change combat title
-	var combatTitle = document.createElement("h1");
-	combatTitle.classList.add("combat-title");
-	combatTitle.innerText = card.combatTitle;
-
-	combatBox.appendChild(combatTitle);
-
-	// p: change combat text
-	var combatText = document.createElement("p");
-	combatText.classList.add("combat-text");
-	combatText.innerText = card.combatText;
-
-	combatBox.appendChild(combatText);
-
-	// BOTTOM TEXT -----------------------------------
-
-	// p: change initative number
-	var initiativeNumber = document.createElement("p");
-	initiativeNumber.classList.add("initiative-number");
-	initiativeNumber.innerText = card.initiativeNumber;
-
-	cardDiv.appendChild(initiativeNumber);
-
-	// p: change card number
-	var cardNumber = document.createElement("p");
-	cardNumber.classList.add("card-number");
-	cardNumber.innerText = card.cardNumber;
-
-	cardDiv.appendChild(cardNumber);
+	combatBox.classList.add(`box-${card.cardSize}`);
 }
 
-function deleteItems() {
-	while(suggestions.firstChild) {
-		suggestions.removeChild(suggestions.firstChild);
+function addCardText(elements, card) {
+	var cardDiv 	= elements.cardDiv;
+	var eventBox 	= elements.eventBox;
+	var combatBox 	= elements.combatBox;
+
+	// add event section text
+	appendTextToDiv("event-title", card.eventTitle, cardDiv);
+	appendTextToDiv("event-text", card.eventText, eventBox);
+	if(card.precondition) appendTextToDiv("precondition", card.precondition, eventBox);
+	if(card.discardCondition) appendTextToDiv("discard-condition", card.discardCondition, eventBox);
+
+	// add combat section text
+	appendTextToDiv("combat-title", card.combatTitle, combatBox);
+	appendTextToDiv("combat-text", card.combatText, combatBox);
+
+	// add misc text
+	appendTextToDiv("initiative-number", card.initiativeNumber, cardDiv);
+	appendTextToDiv("card-number", card.cardNumber, cardDiv);
+}
+
+function appendTextToDiv(className, text, div) {
+	if(className.includes("title")) {
+		var tag = "h1";
+	} else {
+		var tag = "p";
 	}
+
+	var ele = document.createElement(tag);
+	ele.classList.add(className);
+	ele.innerText = text;
+	div.appendChild(ele);
 }
 
-// -------- Functions used to create suggestion dropdown --------
+// ---------------------------------------------------------------------------------
+// displayMatches() creates dropdown suggestions when searching for cards
+// ---------------------------------------------------------------------------------
 
-function highlightMatches(regex, str){
-	var highlightedText =  str.replace(regex, function(match) {
-		return `<span class="highlight">${match}</span>`;
-	});
-
-	return highlightedText;
-}
-
-function createTitle(regex, str) {
-	var h1 = document.createElement("h1");
-	h1.classList.add("title");
-
-	var titleHighlight = highlightMatches(regex, str);
-	h1.innerHTML = titleHighlight;
-
-	return h1;
-}
-
-function createPre(regex, str) {
-	var p = document.createElement("p");
-	p.classList.add("pre");
-
-	var preSub = str.substring(0, 30) + "...";
-	var preHighlight = highlightMatches(regex, preSub);
-	p.innerHTML = preHighlight;
-
-	return p;
-}
-
-function createTxt(regex, str) {
-	var p = document.createElement("p");
-	p.classList.add("txt");
-
-	var textSub = str.substring(0, 155) + "...";
-	var txtHighlight = highlightMatches(regex, textSub);
-	p.innerHTML = txtHighlight;
-
-	return p;
-}
+// TODO: Refactor displayMatches and the functions it calls
 
 function displayMatches() {
 	var value = searchInput.value.trim();
@@ -196,7 +197,7 @@ function displayMatches() {
 }
 
 function createItems(res, value) {
-	deleteItems();
+	removeChildren(suggestions);
 
 	if(res !== null) {
 		if(res.length > 4) {
@@ -230,20 +231,21 @@ function buildLis(arr, regex, replace=false) {
 		a.href = "#";
 
 		a.addEventListener("click", function(){
-			deleteItems();
-			displayCard(card);
+			removeChildren(suggestions);
+			createCard(card);
 		});
 
 		// prevents arrow key nav and mouseover from
 		// creating multiple hover effects
 		a.addEventListener("mouseenter", function(){
+			// TODO: maybe turn this off? kind off annoying
+			// if mouse touches a suggestion while typing
 			a.focus();
 		})
 
 		a.addEventListener("mouseleave", function(){
 			a.blur();
 		})
-
 
 		var li = document.createElement("li");
 
@@ -256,8 +258,6 @@ function buildLis(arr, regex, replace=false) {
 			var pre = createPre(regex, card.precondition);
 			li.appendChild(pre);
 		}
-
-		// create & highlight discard condition text -------------------
 
 		// create & highlight event text -------------------
 		var txt = createTxt(regex, card.eventText);
@@ -300,6 +300,7 @@ function buildNav(res, regex, pages) {
 	left.classList.add("left");
 	right.classList.add("right");
 
+	// creates listeners for left / right buttons
 	left.addEventListener("click", function(){
 		if(currentPage === 0) {
 			return;
@@ -355,64 +356,153 @@ function moveRight(pageArr, page, regex) {
 	buildLis(pageArr[page], regex, true);
 }
 
-// --------------------------------------------------
 
-var searchInput = document.querySelector("input");
-var suggestions = document.querySelector("#suggestions");
+function createTitle(regex, str) {
+	var h1 = document.createElement("h1");
+	h1.classList.add("title");
 
-// display matches when user types in the search bar
-searchInput.addEventListener("keyup", function(event){
-	if(event.keyCode === 40 || event.keyCode === 39 || event.keyCode === 38 || event.keyCode === 37) {
-		return;
+	var titleHighlight = highlightMatches(regex, str);
+	h1.innerHTML = titleHighlight;
+
+	return h1;
+}
+
+function createPre(regex, str) {
+	var p = document.createElement("p");
+	p.classList.add("pre");
+
+	var preSub = str.substring(0, 30) + "...";
+	var preHighlight = highlightMatches(regex, preSub);
+	p.innerHTML = preHighlight;
+
+	return p;
+}
+
+function createTxt(regex, str) {
+	var p = document.createElement("p");
+	p.classList.add("txt");
+
+	var textSub = str.substring(0, 155) + "...";
+	var txtHighlight = highlightMatches(regex, textSub);
+	p.innerHTML = txtHighlight;
+
+	return p;
+}
+
+function highlightMatches(regex, str){
+	var highlightedText =  str.replace(regex, function(match) {
+		return `<span class="highlight">${match}</span>`;
+	});
+
+	return highlightedText;
+}
+// ----------------------------------------------------------------------------
+// Card flip functions
+// ----------------------------------------------------------------------------
+
+function flipCard(card){
+	var cardDiv = document.querySelector(".card");
+
+	// would use destructing here but it isn't supported on
+	// IE or Safari, might use Babel later to do that and
+	// use arrow functions
+	var deckSource = card.deckSource;
+	var faction = card.faction;
+
+	var deckUrlStr = deckSource.replace(/ .*/,'');
+
+	if(faction === "free peoples") {
+		var factionUrlStr = "FP";
+	} else {
+		var factionUrlStr = "Shadow";
 	}
-	displayMatches();
-});
 
-// display matches when user focuses on search bar
-searchInput.addEventListener("focus", displayMatches);
-
-// delete matches when user clicks off search bar or suggestions
-document.addEventListener("click", function(){
-	if(!(event.target === searchInput || suggestions.contains(event.target))) {
-		deleteItems();
+	// if not flipped, flip the card
+	if(!cardDiv.classList.contains("flip-left")) {
+		cardDiv.classList.remove("flip-right");
+		cardDiv.classList.add("flip-left");
+	} else {
+		// if card is flipped, flip it back over
+		cardDiv.classList.remove("flip-left");
+		cardDiv.classList.add("flip-right");
 	}
-});
 
-// allows up and down arrow key navigation on suggestions
-document.addEventListener("keydown", function(event){
-
-	if(event.keyCode === 40 && suggestions.children.length > 0) {
-		event.preventDefault();
-		var next = document.activeElement.nextSibling;
-		if(next === null || next.nodeName === "#text") {
-			suggestions.firstChild.focus();
+	setTimeout(function(){
+		// if card content isn't hidden, hide it
+		if(!cardDiv.classList.contains("hide")) {
+			cardDiv.classList.add("hide");
+			cardDiv.style.backgroundImage = `url(/images/cardbacks/${factionUrlStr}-${deckUrlStr}-Cardback.jpg)`;
 		} else {
-			next.focus();
+			// if card content is hidden, reveal it
+			cardDiv.classList.remove("hide");
+			cardDiv.style.backgroundImage = ``;
 		}
-	}
+	}, 150);
+}
 
-	// up arrow navigation
-	if(event.keyCode === 38 && suggestions.children.length > 0) {
-		event.preventDefault();
-		var prev = document.activeElement.previousSibling;
-		if(prev === null || prev.nodeName === "#text") {
+
+// ----------------------------------------------------------------------------
+// Event Listener Functions
+// ----------------------------------------------------------------------------
+
+// Display matches when typing / focusing search bar, remove when clicking off.
+function addSearchListeners() {
+	var searchInput = document.querySelector("input");
+
+	searchInput.addEventListener("keyup", function(event){
+		var k = event.keyCode; // ignore arrow keys
+		if(k === 40 || k === 39 || k === 38 || k === 37) {
 			return;
-		} else {
-			prev.focus();
 		}
-	}
+		displayMatches();
+	});
 
-	// left arrow navigation (move page left)
-	if(event.keyCode === 37) {
-		event.preventDefault();
-		var prevPageBtn = document.querySelector(".left");
-		prevPageBtn.click();
-	}
+	searchInput.addEventListener("focus", displayMatches);
 
-	// right arrow navigation (move page right)
-	if(event.keyCode === 39) {
-		event.preventDefault();
-		var nextPageBtn = document.querySelector(".right");
-		nextPageBtn.click();
-	}
-});
+	document.addEventListener("click", function(){
+		if(!(event.target === searchInput || suggestions.contains(event.target))) {
+			removeChildren(suggestions);
+		}
+	});
+}
+
+// Arrow key nav on suggestions
+function addArrowKeyListeners() {
+	document.addEventListener("keydown", function(event){
+		// down arrow
+		if(event.keyCode === 40 && suggestions.children.length > 0) {
+			event.preventDefault();
+			var next = document.activeElement.nextSibling;
+			if(next === null || next.nodeName === "#text") {
+				suggestions.firstChild.focus();
+			} else {
+				next.focus();
+			}
+		}
+
+		// up arrow
+		if(event.keyCode === 38 && suggestions.children.length > 0) {
+			event.preventDefault();
+			var prev = document.activeElement.previousSibling;
+			if(prev === null || prev.nodeName === "#text") {
+				return;
+			} else {
+				prev.focus();
+			}
+		}
+
+		// left arrow (move page left)
+		if(event.keyCode === 37) {
+			event.preventDefault();
+			var prevPageBtn = document.querySelector(".left");
+			prevPageBtn.click();
+		}
+
+		// right arrow (move page right)
+		if(event.keyCode === 39) {
+			event.preventDefault();
+			var nextPageBtn = document.querySelector(".right");
+			nextPageBtn.click();
+		}
+	});
+}

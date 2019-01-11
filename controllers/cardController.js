@@ -20,7 +20,8 @@ module.exports = {
 								{discardCondition : regex},
 								{combatTitle : regex},
 								{combatPrecondition : regex},
-								{combatText : regex}
+								{combatText : regex},
+								{faction : regex}
 							]});
 				}
 				res.json(results);

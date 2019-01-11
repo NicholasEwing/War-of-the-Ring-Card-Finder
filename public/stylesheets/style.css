@@ -1,3 +1,48 @@
+/* ------------ Flip Right ------------ */
+
+@-webkit-keyframes flip-vertical-left {
+  0% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+  }
+  100% {
+    -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+  }
+}
+@keyframes flip-vertical-left {
+  0% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+  }
+  100% {
+    -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+  }
+}
+
+@-webkit-keyframes flip-vertical-right {
+  0% {
+    -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+  }
+  100% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+  }
+}
+
+@keyframes flip-vertical-right {
+  0% {
+    -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+  }
+  100% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+  }
+}
+
  /*Custom Fonts - ensure fallback and browser compatability*/
 
 @font-face {
@@ -12,7 +57,6 @@
 	font-style: normal;
 	font-weight: 400;
 }
-
 
 @font-face {
 	src: url(../fonts/PonaDisplay-Semibold.otf);
@@ -43,6 +87,7 @@ html {
 body {
 	min-height: 100%;
 	box-sizing: border-box;
+	text-align: center;
 }
 
 div {
@@ -66,8 +111,17 @@ textarea {
 	height: 100px;
 }
 
-img {
-	max-width: 300px;
+/* ----- Card flip icon -----*/
+
+svg {
+	width: 50px;
+	margin: 10px auto 0;
+	fill: rgba(178,151,150,0.75);
+	transition: all 0.2 ease;
+}
+
+svg:hover {
+	fill: rgba(178,151,150,1);
 }
 
 /* ----- Search Bar Settings -----*/
@@ -107,7 +161,7 @@ a:focus > li {
 	background-color: pink;
 }
 
-/* ---- ---------------------------*/
+/* ---- Card highlighting and suggestion styles ---- */
 
 li h1 {
 	text-align: left;
@@ -120,8 +174,6 @@ li p {
 	font-size: 18px;
 	margin: 0;
 }
-
-/* ---- Card highlighting and suggestion styles ---- */
 
 .title {
 
@@ -159,17 +211,28 @@ a {
 /* ----- General Card Settings -----*/
 
 .card {
-	position: absolute;
-	background-repeat: no-repeat;
+	position: relative;
 	width: 429px;
 	height: 800px;
+	padding: 50px;
+	margin: 0 auto;
 	-webkit-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.75);
 	-moz-box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.75);
 	box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.75);
-	margin: 0 auto;
-	left: 0;
-	right: 0;
-	padding: 50px;
+}
+
+.card.hide > * {
+	visibility: hidden;
+}
+
+.card.flip-left {
+    -webkit-animation: flip-vertical-left 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+	animation: flip-vertical-left 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+
+.card.flip-right {
+	-webkit-animation: flip-vertical-right 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+	animation: flip-vertical-right 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
 
 .shadow-1 {
@@ -192,22 +255,22 @@ a {
 	background-size: auto 100%;
 }
 
-.free-peoples-1 {
+.fp-1 {
 	background: url(/images/card-art/blanks/Blank-FP-Card-1.jpg);
 	background-size: auto 100%;
 }
 
-.free-peoples-2 {
+.fp-2 {
 	background: url(/images/card-art/blanks/Blank-FP-Card-2.jpg);
 	background-size: auto 100%;
 }
 
-.free-peoples-3 {
+.fp-3 {
 	background: url(/images/card-art/blanks/Blank-FP-Card-3.jpg);
 	background-size: auto 100%;
 }
 
-.free-peoples-4 {
+.fp-4 {
 	background: url(/images/card-art/blanks/Blank-FP-Card-4.jpg);
 	background-size: auto 100%;
 }
@@ -227,10 +290,9 @@ a {
 }
 
 .event-text,
-.event-precondition,
+.precondition,
 .discard-condition,
-.combat-text,
-.combat-precondition {
+.combat-text {
 	margin: 2% 2% 2% 2%;
 	font-size: 19px;
 	font-family: PonaDisplay;
@@ -264,8 +326,7 @@ a {
 	font-style: bold;
 }
 
-.event-precondition, 
-.combat-precondition {
+.precondition{
 	font-weight: 600;
 }
 
