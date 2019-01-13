@@ -4,7 +4,8 @@
   "description": "In this project, I've created a web application where you can search and find event cards from the popular War of the Ring (2nd Edition) board game.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "app.js"
   },
   "repository": {
     "type": "git",
