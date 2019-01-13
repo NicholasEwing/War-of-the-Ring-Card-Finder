@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 // event card schema
 const cardSchema = new mongoose.Schema({
 	// Event section
+	// TODO: Add trim to strings
 	eventTitle: {type: String, unique: true, required: true},
 	cardSize: {type: Number, required: true},
 	deckSource: {type: String, required: true}, // options: Character Deck, Strategy Deck
