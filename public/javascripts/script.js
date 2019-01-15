@@ -4,177 +4,189 @@
 
 // TODO: get rid of globals
 
+// TODO: Normalize the 'free peoples' naming scheme with files and in DB
+
+// TODO optimization:
+//   replace vars with const / let
+//   replace queryselectors with getElements
+//   find areas where functions can be short circuited faster!
+
 // listener logic for flip card
-var listening = false;
-listener = function() {
-  flipCard(card);
-};
+let suggestions = document.querySelector("#suggestions");
+let searchInput = document.querySelector("input");
 
-var suggestions = document.querySelector("#suggestions");
-var searchInput = document.querySelector("input");
-
-addSearchListeners();
-addArrowKeyListeners();
-// ---------------------------------------------------------------------------------
-// createCard() handles logic to create a new card when a suggestion is selected
-// ---------------------------------------------------------------------------------
-
-function createCard(card) {
-  var elements = getCardElements();
-  var settings = getFactionSettings(card, elements);
-
-  flipBtnReset(card);
-  removeChildren(elements.cardDiv);
-  changeBg(settings, elements);
-  changeTypeIcon(settings, elements);
-  changeBoxSizes(settings, elements, card);
-  addCardText(elements, card);
+// this is still global jsut figure out something idk
+function removeChildren(parentElement) {
+  parentElement.innerHTML = "";
 }
 
-function flipBtnReset(card) {
+// card module
+const cardModule = (function() {
+  // vars--------------------------
   var cardDiv = document.querySelector(".card");
   var flipBtn = document.querySelector(".flip-btn");
+  var typeIcon = document.querySelector(".type-icon");
 
-  cardDiv.classList.remove("flip-left");
-  cardDiv.classList.remove("flip-right");
-  cardDiv.classList.remove("hide");
-  cardDiv.style.backgroundImage = "";
-  cardDiv.style.backgroundSize = "";
+  var eventBox = document.querySelector(".event-box");
+  var eventTitle = document.querySelector(".event-title");
+  var eventPre = document.querySelector(".precondition");
+  var eventText = document.querySelector(".event-text");
+  var eventDiscard = document.querySelector(".discard-condition");
 
-  // clean up event handlers (and everything else...), this is super sloppy
-  // https://stackoverflow.com/questions/10000083/javascript-event-handler-with-parameters
+  var combatBox = document.querySelector(".combat-box");
+  var combatTitle = document.querySelector(".combat-title");
+  var combatText = document.querySelector(".combat-text");
 
-  if (!listening) {
-    listening = true;
+  var initiativeNumber = document.querySelector(".initiative-number");
+  var cardNumber = document.querySelector(".card-number");
 
-    listener = function() {
-      flipCard(card);
-    };
+  let listening = false;
+  let listener;
 
-    flipBtn.addEventListener("click", listener);
-  } else {
-    flipBtn.removeEventListener("click", listener);
+  // functions----------------------
+  function createCard(card) {
+    var settings = getFactionSettings(card);
 
-    listener = function() {
-      flipCard(card);
-    };
-
-    flipBtn.addEventListener("click", listener);
-  }
-}
-
-function removeChildren(parentElement) {
-  while (parentElement.firstChild) {
-    parentElement.removeChild(parentElement.firstChild);
-  }
-}
-
-function getCardElements() {
-  var elements = {};
-
-  elements.cardDiv = document.querySelector(".card");
-  elements.eventBox = document.createElement("div");
-  elements.typeIcon = document.createElement("img");
-  elements.combatBox = document.createElement("div");
-
-  return elements;
-}
-
-function getFactionSettings(card, elements) {
-  var eventBox = elements.eventBox;
-  var combatBox = elements.combatBox;
-
-  var settings = {};
-
-  if (card.faction === "free peoples") {
-    settings.newClass = `fp-${card.cardSize}`;
-    settings.imgClass = "type-icon-fp";
-    settings.iconSrc = `fp-${card.type}-Icon.png`;
-    eventBox.classList.add("event-box-free-peoples");
-    combatBox.classList.add("combat-box-free-peoples");
-  } else {
-    settings.newClass = `${card.faction}-${card.cardSize}`;
-    settings.imgClass = `type-icon-${card.faction}`;
-    settings.iconSrc = `${card.faction}-${card.type}-Icon.png`;
-    eventBox.classList.add(`event-box-${card.faction}`);
-    combatBox.classList.add(`combat-box-${card.faction}`);
+    flipBtnReset(card);
+    changeBg(settings);
+    changeTypeIcon(settings);
+    changeBoxSizes(card.cardSize);
+    replaceCardText(card);
   }
 
-  return settings;
-}
+  function flipBtnReset(card) {
+    cardDiv.classList.remove("flip-left");
+    cardDiv.classList.remove("flip-right");
+    cardDiv.classList.remove("hide");
+    cardDiv.style.backgroundImage = "";
+    cardDiv.style.backgroundSize = "";
 
-function changeBg(settings, elements) {
-  var cardDiv = elements.cardDiv;
-  var oldClass = cardDiv.classList.item(1);
-  var newClass = settings.newClass;
+    if (!listening) {
+      listening = true;
 
-  cardDiv.classList.replace(oldClass, newClass);
-}
+      listener = function() {
+        flipCard(card);
+      };
 
-function changeTypeIcon(settings, elements) {
-  var cardDiv = elements.cardDiv;
-  var typeIcon = elements.typeIcon;
-  var imgClass = settings.imgClass;
-  var iconSrc = settings.iconSrc;
+      flipBtn.addEventListener("click", listener);
+    } else {
+      flipBtn.removeEventListener("click", listener);
 
-  typeIcon.classList.add(imgClass);
-  typeIcon.src = `/images/icons/${iconSrc}`;
-  cardDiv.appendChild(typeIcon);
-}
+      // change listener to use the new card
+      listener = function() {
+        flipCard(card);
+      };
 
-function changeBoxSizes(settings, elements, card) {
-  var cardDiv = elements.cardDiv;
-  var eventBox = elements.eventBox;
-  var combatBox = elements.combatBox;
-
-  cardDiv.appendChild(eventBox);
-  cardDiv.appendChild(combatBox);
-  combatBox.classList.add(`box-${card.cardSize}`);
-}
-
-function addCardText(elements, card) {
-  var cardDiv = elements.cardDiv;
-  var eventBox = elements.eventBox;
-  var combatBox = elements.combatBox;
-
-  // add event section text
-  appendTextToDiv("event-title", card.eventTitle, cardDiv);
-  appendTextToDiv("event-text", card.eventText, eventBox);
-  if (card.precondition)
-    appendTextToDiv("precondition", card.precondition, eventBox);
-  if (card.discardCondition)
-    appendTextToDiv("discard-condition", card.discardCondition, eventBox);
-
-  // add combat section text
-  appendTextToDiv("combat-title", card.combatTitle, combatBox);
-  appendTextToDiv("combat-text", card.combatText, combatBox);
-
-  // add misc text
-  appendTextToDiv("initiative-number", card.initiativeNumber, cardDiv);
-  appendTextToDiv("card-number", card.cardNumber, cardDiv);
-}
-
-function appendTextToDiv(className, text, div) {
-  if (className.includes("title")) {
-    var tag = "h1";
-  } else {
-    var tag = "p";
+      flipBtn.addEventListener("click", listener);
+    }
   }
 
-  var ele = document.createElement(tag);
-  ele.classList.add(className);
-  ele.innerText = text;
-  div.appendChild(ele);
-}
+  function flipCard(card) {
+    var deckSource = card.deckSource;
+    var faction = card.faction;
+
+    if (faction === "free peoples") {
+      var factionUrlStr = "free-peoples";
+    } else {
+      var factionUrlStr = "Shadow";
+    }
+
+    // if not flipped, flip the card
+    if (!cardDiv.classList.contains("flip-left")) {
+      cardDiv.classList.remove("flip-right");
+      cardDiv.classList.add("flip-left");
+    } else {
+      // if card is flipped, flip it back over
+      cardDiv.classList.remove("flip-left");
+      cardDiv.classList.add("flip-right");
+    }
+
+    setTimeout(function() {
+      // if card content isn't hidden, hide it
+      if (!cardDiv.classList.contains("hide")) {
+        cardDiv.classList.add("hide");
+        cardDiv.style.backgroundImage = `url(/images/cardbacks/${factionUrlStr}-${deckSource}-Cardback.jpg)`;
+      } else {
+        // if card content is hidden, reveal it
+        cardDiv.classList.remove("hide");
+        cardDiv.style.backgroundImage = ``;
+      }
+    }, 150);
+  }
+
+  function getFactionSettings(card) {
+    var settings = {};
+    var oldEvBoxClass = eventBox.classList.item(0);
+    var oldComBoxClass = combatBox.classList.item(0);
+
+    if (card.faction === "free peoples") {
+      settings.newClass = `fp-${card.cardSize}`;
+      settings.imgClass = "type-icon-fp";
+      settings.iconSrc = `fp-${card.type}-Icon.png`;
+      eventBox.classList.replace(oldEvBoxClass, "event-box-free-peoples");
+      combatBox.classList.replace(oldComBoxClass, "combat-box-free-peoples");
+    } else {
+      settings.newClass = `${card.faction}-${card.cardSize}`;
+      settings.imgClass = `type-icon-${card.faction}`;
+      settings.iconSrc = `${card.faction}-${card.type}-Icon.png`;
+      eventBox.classList.replace(oldEvBoxClass, `event-box-${card.faction}`);
+      combatBox.classList.replace(oldComBoxClass, `combat-box-${card.faction}`);
+    }
+
+    return settings;
+  }
+
+  function changeBg(settings) {
+    var oldClass = cardDiv.classList.item(1);
+    var newClass = settings.newClass;
+    cardDiv.classList.replace(oldClass, newClass);
+  }
+
+  function changeTypeIcon(settings) {
+    var imgClass = settings.imgClass;
+    var iconSrc = settings.iconSrc;
+
+    var oldClass = typeIcon.classList.item(0);
+    typeIcon.classList.replace(oldClass, imgClass);
+    typeIcon.src = `/images/icons/${iconSrc}`;
+    cardDiv.appendChild(typeIcon);
+  }
+
+  function changeBoxSizes(cardSize) {
+    var oldSize = combatBox.classList.item(1);
+    if (oldSize) {
+      combatBox.classList.replace(oldSize, `box-${cardSize}`);
+    } else {
+      combatBox.classList.add(`box-${cardSize}`);
+    }
+  }
+
+  function replaceCardText(card) {
+    eventTitle.innerText = card.eventTitle;
+    eventPre.innerText = card.precondition;
+    eventText.innerText = card.eventText;
+    eventDiscard.innerText = card.discardCondition;
+    combatTitle.innerText = card.combatTitle;
+    combatText.innerText = card.combatText;
+    initiativeNumber.innerText = card.initiativeNumber;
+    cardNumber.innerText = card.cardNumber;
+  }
+
+  // only expose what is needed!
+  return {
+    createCard: createCard
+  };
+})();
 
 // ---------------------------------------------------------------------------------
 // displayMatches() creates dropdown suggestions when searching for cards
 // ---------------------------------------------------------------------------------
 
-// TODO: Refactor displayMatches and the functions it calls
+// TODO: create a suggestionsModule and stick everything relevant in it
 
 function displayMatches() {
   var value = searchInput.value.trim();
+  // TODO: Check if fetch exists, if not, use XML instead! IE compatiability!
   if (typeof value !== "undefined") {
     var request = new XMLHttpRequest();
     request.responseType = "json";
@@ -243,7 +255,7 @@ function buildLink(card) {
 
   a.addEventListener("click", function() {
     removeChildren(suggestions);
-    createCard(card);
+    cardModule.createCard(card);
   });
 
   a.addEventListener("mouseenter", function() {
@@ -409,56 +421,13 @@ function highlightMatches(regex, str) {
 
   return highlightedText;
 }
-// ----------------------------------------------------------------------------
-// Card flip functions
-// ----------------------------------------------------------------------------
-
-function flipCard(card) {
-  var cardDiv = document.querySelector(".card");
-
-  // would use destructing here but it isn't supported on
-  // IE or Safari, might use Babel later to do that and
-  // use arrow functions
-  var deckSource = card.deckSource;
-  var faction = card.faction;
-
-  var deckUrlStr = deckSource.replace(/ .*/, "");
-
-  if (faction === "free peoples") {
-    var factionUrlStr = "FP";
-  } else {
-    var factionUrlStr = "Shadow";
-  }
-
-  // if not flipped, flip the card
-  if (!cardDiv.classList.contains("flip-left")) {
-    cardDiv.classList.remove("flip-right");
-    cardDiv.classList.add("flip-left");
-  } else {
-    // if card is flipped, flip it back over
-    cardDiv.classList.remove("flip-left");
-    cardDiv.classList.add("flip-right");
-  }
-
-  setTimeout(function() {
-    // if card content isn't hidden, hide it
-    if (!cardDiv.classList.contains("hide")) {
-      cardDiv.classList.add("hide");
-      cardDiv.style.backgroundImage = `url(/images/cardbacks/${factionUrlStr}-${deckUrlStr}-Cardback.jpg)`;
-    } else {
-      // if card content is hidden, reveal it
-      cardDiv.classList.remove("hide");
-      cardDiv.style.backgroundImage = ``;
-    }
-  }, 150);
-}
 
 // ----------------------------------------------------------------------------
 // Event Listener Functions
 // ----------------------------------------------------------------------------
 
 // Display matches when typing / focusing search bar, remove when clicking off.
-function addSearchListeners() {
+(function addSearchListeners() {
   var searchInput = document.querySelector("input");
 
   searchInput.addEventListener("keyup", function(event) {
@@ -476,10 +445,9 @@ function addSearchListeners() {
       removeChildren(suggestions);
     }
   });
-}
+})();
 
-// Arrow key nav on suggestions
-function addArrowKeyListeners() {
+(function addArrowKeyListeners() {
   document.addEventListener("keydown", function(event) {
     // down arrow
     if (event.keyCode === 40 && suggestions.children.length > 0) {
@@ -517,4 +485,4 @@ function addArrowKeyListeners() {
       nextPageBtn.click();
     }
   });
-}
+})();
