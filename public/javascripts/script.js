@@ -9,26 +9,24 @@ function removeChildren(parentElement) {
   *
     --------------------------------------------------------------------- */
 const cardModule = (function() {
-  const cardDiv = document.getElementsByClassName("card")[0];
-  const flipBtn = document.getElementsByClassName("flip-btn")[0];
-  const typeIcon = document.getElementsByClassName("type-icon")[0];
+  const cardDiv = document.getElementById("card");
+  const flipBtn = document.getElementById("flip-btn");
+  const typeIcon = document.getElementById("type-icon");
 
-  const eventBox = document.getElementsByClassName("event-box")[0];
-  const eventTitle = document.getElementsByClassName("event-title")[0];
-  const eventPre = document.getElementsByClassName("precondition")[0];
-  const eventText = document.getElementsByClassName("event-text")[0];
-  const eventDiscard = document.getElementsByClassName("discard-condition")[0];
+  const eventBox = document.getElementById("event-box");
+  const eventTitle = document.getElementById("event-title");
+  const eventPre = document.getElementById("precondition");
+  const eventText = document.getElementById("event-text");
+  const eventDiscard = document.getElementById("discard-condition");
 
-  const combatBox = document.getElementsByClassName("combat-box")[0];
-  const combatTitle = document.getElementsByClassName("combat-title")[0];
-  const combatText = document.getElementsByClassName("combat-text")[0];
+  const combatBox = document.getElementById("combat-box");
+  const combatTitle = document.getElementById("combat-title");
+  const combatText = document.getElementById("combat-text");
 
   console.log(cardDiv);
 
-  const initiativeNumber = document.getElementsByClassName(
-    "initiative-number"
-  )[0];
-  const cardNumber = document.getElementsByClassName("card-number")[0];
+  const initiativeNumber = document.getElementById("initiative-number");
+  const cardNumber = document.getElementById("card-number");
 
   let listening = false;
   let listener;
@@ -123,16 +121,26 @@ const cardModule = (function() {
   function changeBg(settings) {
     const oldClass = cardDiv.classList.item(1);
     const bgClass = settings.bgClass;
-    cardDiv.classList.replace(oldClass, bgClass);
+    if (oldClass) {
+      cardDiv.classList.replace(oldClass, bgClass);
+    } else {
+      cardDiv.classList.add("card");
+      cardDiv.classList.add(bgClass);
+    }
   }
 
   function changeTypeIcon(settings) {
+    const oldClass = typeIcon.classList.item(0);
     const imgClass = settings.imgClass;
     const iconSrc = settings.iconSrc;
-    const oldClass = typeIcon.classList.item(0);
 
-    typeIcon.classList.replace(oldClass, imgClass); // change icon placement based on faction
-    typeIcon.src = `/images/icons/${iconSrc}`; // change icon based on faction and icon type
+    if (oldClass) {
+      typeIcon.classList.replace(oldClass, imgClass);
+    } else {
+      typeIcon.classList.add(imgClass);
+    }
+
+    typeIcon.src = `/images/icons/${iconSrc}`;
     cardDiv.appendChild(typeIcon);
   }
 
@@ -142,8 +150,13 @@ const cardModule = (function() {
     const newEvBoxClass = `event-box-${card.faction}`;
     const newComBoxClass = `combat-box-${card.faction}`;
 
-    eventBox.classList.replace(oldEvBoxClass, newEvBoxClass);
-    combatBox.classList.replace(oldComBoxClass, newComBoxClass);
+    if (oldEvBoxClass && oldComBoxClass) {
+      eventBox.classList.replace(oldEvBoxClass, newEvBoxClass);
+      combatBox.classList.replace(oldComBoxClass, newComBoxClass);
+    } else {
+      eventBox.classList.add(newEvBoxClass);
+      combatBox.classList.add(newComBoxClass);
+    }
 
     const oldSize = combatBox.classList.item(1);
     if (oldSize) {
@@ -312,8 +325,8 @@ const suggestionModule = (function() {
 
     left.innerHTML = "";
     right.innerHTML = ">";
-    left.classList.add("left");
-    right.classList.add("right");
+    left.id = "left";
+    right.id = "right";
 
     left.addEventListener("click", function() {
       if (currentPage === 1) return;
@@ -337,7 +350,7 @@ const suggestionModule = (function() {
 
     updatePageTxt(p, currentPage, pages);
 
-    p.classList.add("pages");
+    p.id = "pages";
     li.appendChild(left);
     li.appendChild(right);
     li.appendChild(p);
@@ -405,14 +418,14 @@ const suggestionModule = (function() {
       // left arrow (move page left)
       if (event.keyCode === 37) {
         event.preventDefault();
-        const prevPageBtn = document.getElementsByClassName(".left")[0];
+        const prevPageBtn = document.getElementById("left");
         prevPageBtn.click();
       }
 
       // right arrow (move page right)
       if (event.keyCode === 39) {
         event.preventDefault();
-        const nextPageBtn = document.getElementsByClassName(".right")[0];
+        const nextPageBtn = document.getElementById("right");
         nextPageBtn.click();
       }
     });

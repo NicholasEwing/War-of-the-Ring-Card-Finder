@@ -14,22 +14,22 @@
     <% if(card === null || typeof card === undefined) { %>
     <h1>No card found!</h1>
     <% } else { %>
-    <div class="card placeholder">
-      <img class="type-icon" />
-      <h1 class="event-title"></h1>
-      <div class="event-box">
-        <p class="precondition"></p>
-        <p class="event-text"></p>
-        <p class="discard-condition"></p>
+    <div id="card">
+      <img id="type-icon" />
+      <h1 id="event-title"></h1>
+      <div id="event-box">
+        <p id="precondition"></p>
+        <p id="event-text"></p>
+        <p id="discard-condition"></p>
       </div>
-      <div class="combat-box">
-        <h1 class="combat-title"></h1>
-        <p class="combat-text"></p>
+      <div id="combat-box">
+        <h1 id="combat-title"></h1>
+        <p id="combat-text"></p>
       </div>
-      <p class="initiative-number"></p>
-      <p class="card-number"></p>
+      <p id="initiative-number"></p>
+      <p id="card-number"></p>
     </div>
-    <a class="flip-btn" href="#">
+    <a id="flip-btn" href="#">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"

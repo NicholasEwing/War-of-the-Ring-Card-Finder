@@ -177,9 +177,6 @@ li p {
   margin: 0;
 }
 
-.title {
-}
-
 .pre {
   font-weight: bold;
 }
@@ -191,15 +188,15 @@ li p {
   background-color: rgb(255, 251, 204);
 }
 
-.left {
+#left {
   float: left;
 }
 
-.right {
+#right {
   float: right;
 }
 
-.pages {
+#pages {
   text-align: center;
 }
 
@@ -293,14 +290,22 @@ a {
   height: 84px;
 }
 
-.event-text,
-.precondition,
-.discard-condition,
-.combat-text {
+#event-text,
+#precondition,
+#discard-condition,
+#combat-text {
   margin: 2% 2% 2% 2%;
   font-size: 19px;
   font-family: PonaDisplay;
   white-space: pre-wrap;
+}
+
+#combat-title {
+  font-size: 25px;
+  margin: 0 auto;
+  margin-bottom: 2%;
+  font-family: PonaDisplay;
+  font-style: bold;
 }
 
 /* -------- Event Section --------*/
@@ -322,7 +327,7 @@ a {
   width: 315px;
 }
 
-.event-title {
+#event-title {
   font-size: 25px;
   width: 63%;
   margin: 0 auto;
@@ -330,15 +335,15 @@ a {
   font-style: bold;
 }
 
-.precondition {
+#precondition {
   font-weight: 600;
 }
 
-.discard-condition {
+#discard-condition {
   font-style: italic;
 }
 
-.special-hunt-tile-img {
+#special-hunt-tile-img {
   position: absolute;
   top: 40%;
   left: 50%;
@@ -386,25 +391,16 @@ a {
   bottom: 8%;
   right: 11%;
 }
-
-.combat-title {
-  font-size: 25px;
-  margin: 0 auto;
-  margin-bottom: 2%;
-  font-family: PonaDisplay;
-  font-style: bold;
-}
-
 /* ------- Bottom Card Text -------*/
 
-.initiative-number {
+#initiative-number {
   position: absolute;
   font-weight: bold;
   top: 89.5%;
   left: 11.5%;
 }
 
-.card-number {
+#card-number {
   position: absolute;
   top: 96%;
   font-size: 0.6rem;
