@@ -23,6 +23,8 @@ const cardModule = (function() {
   const combatTitle = document.getElementById("combat-title");
   const combatText = document.getElementById("combat-text");
 
+  console.log(cardDiv);
+
   const initiativeNumber = document.getElementById("initiative-number");
   const cardNumber = document.getElementById("card-number");
 
@@ -41,7 +43,9 @@ const cardModule = (function() {
 
   function flipBtnReset(card) {
     // reset classes and bg image
-    cardDiv.classList.remove("flip-right", "hide", "flip-left");
+    cardDiv.classList.remove("flip-left");
+    cardDiv.classList.remove("flip-right");
+    cardDiv.classList.remove("hide");
     cardDiv.style.backgroundImage = "";
     cardDiv.style.backgroundSize = "";
 
@@ -199,24 +203,7 @@ const suggestionModule = (function() {
       request.onload = function() {
         if (this.status === 200) {
           const matches = this.response;
-          const regex = new RegExp(value, "gi");
-          const isDropdown = !!suggestions.children.length;
-
-          // if no matches, remove suggestions
-          if (!matches) {
-            removeChildren(suggestions);
-            return;
-          }
-
-          const pageArr = splitPages(matches, regex); // breaks all matches into "pages", 5 matches per page
-
-          if (isDropdown) {
-            // replace dropdown with new matches, update nav bar
-            updateDropdown(pageArr, regex);
-          } else {
-            // if no dropdown, make one
-            createDropdown(pageArr[0], regex, pageArr.length); //TODO: Enable page navigation again
-          }
+          createItems(matches, value);
         } else if (this.status === 404) {
           console.log("Error occurred");
         }
@@ -229,170 +216,6 @@ const suggestionModule = (function() {
       request.send();
     }
   }
-
-  //TODO: Major refactor - replace lis instead of deleting
-
-  // createDropdown------------------------------------------
-  //    takes first 5 or fewer matches, makes elements, and fills them in
-  function createDropdown(firstPage, regex, numOfPages) {
-    const elements = createElements();
-
-    if (firstPage.length !== 5) {
-      const diff = elements.length - firstPage.length;
-
-      // hide unused elements starting from the bottom
-      for (let i = diff; i > 0; i--) {
-        elements[i].children[0].style.display = "none";
-      }
-    }
-
-    fillElements(firstPage, elements, regex);
-
-    // if more than 1 page of matches - add a nav bar
-    if (numOfPages > 1) suggestions.appendChild(createNav(numOfPages));
-  }
-
-  function createElements() {
-    const arr = [];
-
-    // create 5 a tags containing lis
-    for (let i = 0; i < 5; i++) {
-      const a = document.createElement("a");
-      const li = document.createElement("li");
-
-      // make static li stuff
-      const title = document.createElement("h1");
-      const pre = document.createElement("p");
-      const text = document.createElement("p");
-
-      title.id = "title";
-      pre.id = "pre";
-      text.id = "text";
-
-      li.appendChild(title);
-      li.appendChild(pre);
-      li.appendChild(text);
-
-      a.href = "#";
-      a.appendChild(li);
-
-      arr.push(a);
-      // add to dropdown
-      suggestions.appendChild(a);
-    }
-
-    return arr;
-  }
-
-  function fillElements(firstPage, elements, regex) {
-    firstPage.forEach(function(card, i) {
-      const parentItem = elements[i];
-
-      parentItem.addEventListener("click", function() {
-        removeChildren(suggestions);
-        cardModule.createCard(card);
-      });
-
-      // get li elements
-      const li = parentItem.children[0];
-      const titleEle = li.children[0];
-      const preconditionEle = li.children[1];
-      const eventTextEle = li.children[2];
-
-      // check for precondition text
-      const hasPre = !!card.precondition;
-
-      // format text
-      const title = card.eventTitle;
-      const pre = hasPre ? card.precondition.substring(0, 30) + "..." : "";
-      const eventText = card.eventText.substring(0, 155) + "...";
-
-      // insert text to li
-      titleEle.innerHTML = highlightMatches(regex, title);
-      preconditionEle.innerHTML = highlightMatches(regex, pre);
-      eventTextEle.innerHTML = highlightMatches(regex, eventText);
-    });
-  }
-
-  function createNav(numOfPages) {
-    const li = document.createElement("li");
-    const p = document.createElement("p");
-    const left = document.createElement("span");
-    const right = document.createElement("span");
-    let currentPage = 1;
-
-    left.innerHTML = "";
-    right.innerHTML = ">";
-    left.id = "left";
-    right.id = "right";
-
-    left.addEventListener("click", function() {
-      if (currentPage === 1) return;
-      currentPage--;
-      if (currentPage === 1) left.innerHTML = ""; // removes arrow when going from page 2 to page 1
-      if (currentPage === pages - 1) right.innerHTML = ">";
-
-      // need to make sure these functions below use the 1) updateDropdown function with the next page, depending on what current page is
-      // movePage(res, currentPage, regex, p);
-      // updatePageTxt(p, currentPage, pages);
-    });
-
-    right.addEventListener("click", function() {
-      if (currentPage === pages) return;
-      currentPage++;
-      if (currentPage > 0) left.innerHTML = "<";
-      if (currentPage === pages) right.innerHTML = "";
-
-      // movePage(res, currentPage, regex, p);
-      // updatePageTxt(p, currentPage, pages);
-    });
-
-    p.innerHTML = `Page ${currentPage} out of ${numOfPages}`;
-    // updatePageTxt(p, currentPage, pages);
-
-    p.id = "pages";
-    li.appendChild(left);
-    li.appendChild(right);
-    li.appendChild(p);
-    return li;
-  }
-
-  // ---------------------------------------------------------
-  // updateDropdown ------------------------------------------
-
-  // only triggers when dropdown items exist, such as new queries or moving pages
-  function updateDropdown(newPage) {
-    const items = suggestions.getElementsByTagName("A");
-    console.log();
-
-    if (newPage.length > items.length) {
-      const diff = newPage.length - items.length; // need to reveal
-      // if more matches than lis, reveal some
-    }
-    // if fewer matches than lis, hide some
-    // same amount of matches and lis, don't do shit just replace
-
-    console.log(newPage);
-    console.log(newPage.length);
-    // if nextPage and number of dropdown items are different
-    //  if too many items, hide some
-    //  if insufficient items, reveal some
-
-    // takes next 5 (or less) matches and replaces txt
-    // nextPage.forEach(function() {
-    //   // GET all relevant elements
-    //   const parentItem = true;
-
-    //   const li = true;
-    //   const titleEle = true;
-    //   const preconditionEle = true;
-    //   const eventTextEle = true;
-    // });
-
-    // update nav bar
-  }
-
-  // ---------------------------------------------------------
 
   function createItems(matches, value) {
     removeChildren(suggestions);
@@ -559,7 +382,7 @@ const suggestionModule = (function() {
   function addSearchListeners() {
     searchInput.addEventListener("keyup", function(event) {
       const k = event.keyCode; // ignore arrow keys
-      if (k > 36 && k < 41) return;
+      if (k === 40 || k === 39 || k === 38 || k === 37) return;
       suggestionModule.displayMatches();
     });
 
@@ -611,8 +434,7 @@ const suggestionModule = (function() {
   return {
     displayMatches: displayMatches,
     addSearchListeners: addSearchListeners,
-    addArrowKeyListeners: addArrowKeyListeners,
-    createDropdown: createDropdown
+    addArrowKeyListeners: addArrowKeyListeners
   };
 })();
 

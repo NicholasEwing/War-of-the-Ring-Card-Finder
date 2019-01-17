@@ -177,11 +177,11 @@ li p {
   margin: 0;
 }
 
-#pre {
+.pre {
   font-weight: bold;
 }
 
-#txt {
+.txt {
 }
 
 .highlight {
