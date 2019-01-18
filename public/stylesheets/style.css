@@ -156,6 +156,7 @@ i {
 
 #brand {
   float: left;
+  font-size: 1vw;
   padding-left: 30px;
   font-family: "Ringbearer";
 }
@@ -488,4 +489,18 @@ a {
   font-size: 0.6rem;
   right: 2.75%;
   color: white;
+}
+
+@media all and (max-width: 1000px) {
+  #brand {
+    display: none;
+  }
+
+  .nav-btn {
+    display: none;
+  }
+
+  form {
+    width: 90%;
+  }
 }
