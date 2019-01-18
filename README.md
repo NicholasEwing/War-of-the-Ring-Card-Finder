@@ -63,18 +63,18 @@ TODO:
   - ~~enable page counter~~
   - ~~move left~~
   - ~~move right~~
-  - ~~highlight query on new suggestions~~ \* ~~render card when selected~~
+  - ~~highlight query on new suggestions~~
+  - ~~render card when selected~~
 - **Polish**
   - ~~move combat init number down slightly~~
   - ~~Use module pattern~~
   - ~~dry up code completely before moving on~~
-  - change suggestion highlight color and bg based on faction (red for shadow, blue for free peoples)
   - make app look like an actual website, add background, contact info, links to ares, etc
   - maybe add useful shortcut buttons? ("show all shadow, show all fp, show all character, etc?")
   - find way to preload bg images and cache them to prevent white flash on initial search
   - ~~don't make nav bar highlight on hover, don't allow nav bar focus~~
   - ~~add card icon (muster / army / character) on suggestion lis~~
-  - need to fix some SUPER minor white space issue with shadow icons
+  - ~~need to fix some SUPER minor white space issue with shadow icons~~
   - ~~allow card flip to show relevant cardback~~
   - ~~ensure type-ahead suggestions can be navigated and selected with arrow keys + enter~~
   - ~~up and down arrows work~~

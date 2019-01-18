@@ -23,8 +23,6 @@ const cardModule = (function() {
   const combatTitle = document.getElementById("combat-title");
   const combatText = document.getElementById("combat-text");
 
-  console.log(cardDiv);
-
   const initiativeNumber = document.getElementById("initiative-number");
   const cardNumber = document.getElementById("card-number");
 
@@ -191,6 +189,34 @@ const cardModule = (function() {
 const suggestionModule = (function() {
   const suggestions = document.getElementById("suggestions");
   const searchInput = document.getElementById("input");
+
+  function randomPlaceholder() {
+    const list = [
+      "Nazgul",
+      "Fellowship",
+      "Aragorn",
+      "Shadow Army",
+      "Shadow",
+      "Free Peoples",
+      "Witch-King",
+      "Isengard",
+      "Rohan",
+      "Hunt Tile",
+      "Stronghold",
+      "Will of the West",
+      "Gandalf the White",
+      "The Ents Awake",
+      "At War",
+      "Gondor",
+      "Elves",
+      "Gollum",
+      "Fangorn",
+      "Minas Tirith"
+    ];
+
+    random = Math.floor(Math.random() * list.length);
+    searchInput.placeholder = list[random];
+  }
 
   function displayMatches() {
     const value = searchInput.value.trim();
@@ -382,7 +408,7 @@ const suggestionModule = (function() {
   function addSearchListeners() {
     searchInput.addEventListener("keyup", function(event) {
       const k = event.keyCode; // ignore arrow keys
-      if (k === 40 || k === 39 || k === 38 || k === 37) return;
+      if (k > 36 && k < 41) return;
       suggestionModule.displayMatches();
     });
 
@@ -434,9 +460,11 @@ const suggestionModule = (function() {
   return {
     displayMatches: displayMatches,
     addSearchListeners: addSearchListeners,
-    addArrowKeyListeners: addArrowKeyListeners
+    addArrowKeyListeners: addArrowKeyListeners,
+    randomPlaceholder: randomPlaceholder
   };
 })();
 
 suggestionModule.addSearchListeners();
 suggestionModule.addArrowKeyListeners();
+suggestionModule.randomPlaceholder();
