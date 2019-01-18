@@ -69,8 +69,7 @@ TODO:
   - ~~move combat init number down slightly~~
   - ~~Use module pattern~~
   - ~~dry up code completely before moving on~~
-  - make app look like an actual website, add background, contact info, links to ares, etc
-  - maybe add useful shortcut buttons? ("show all shadow, show all fp, show all character, etc?")
+  - ~~make app look like an actual website, add background, contact info, etc~~
   - find way to preload bg images and cache them to prevent white flash on initial search
   - ~~don't make nav bar highlight on hover, don't allow nav bar focus~~
   - ~~add card icon (muster / army / character) on suggestion lis~~

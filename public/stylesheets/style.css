@@ -72,6 +72,11 @@
   font-weight: 700;
 }
 
+@font-face {
+  src: url(../fonts/Ringbearer.ttf);
+  font-family: Ringbearer;
+}
+
 /* Begin Styles */
 
 *,
@@ -90,12 +95,7 @@ body {
   box-sizing: border-box;
   text-align: center;
   margin: 0px;
-  /* background-color: rgb(228, 221, 211); */
-  /* background-color: lightgray; */
-}
-
-div {
-  /* text-align: center; */
+  background-color: rgba(178, 151, 114, 0.25);
 }
 
 label,
@@ -114,71 +114,78 @@ textarea {
 
 /* -------- Nav bar -------- */
 
-#brand {
-  float: left;
-}
-
-li svg {
+#navbar li > svg {
   width: 30px;
   margin: -10px 5px;
 }
+
 #navbar {
   margin: 0;
-  padding: 0;
-  background-color: rgba(178, 151, 114, 1);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-}
-
-#navbar ul {
-  margin: 0;
   height: 60px;
-  color: #fff;
-  list-style-type: none;
   text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  background-color: rgba(178, 151, 114, 1);
 }
 
-#navbar ul li {
-  display: inline;
-  font-family: sans-serif;
+#nav-container {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  color: rgba(255, 255, 255, 0.75);
+  transition: all 0.2ms ease-in-out;
+}
+
+#nav-container li {
   line-height: 60px;
+  margin: auto 25px;
   font-size: 20px;
-  padding: 0 1em;
+  padding-right: 30px;
 }
 
-#navbar ul li a {
+#nav-container li:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.nav-btn {
   float: right;
-  text-decoration: none;
-  padding: 0.2em 1em;
-  color: #fff;
-  background-color: #000;
 }
 
-#navbar ul li a:hover {
-  color: #000;
-  background-color: #fff;
+i {
+  margin-right: 6px;
+}
+
+#brand {
+  float: left;
+  padding-left: 30px;
+  font-family: "Ringbearer";
 }
 
 /* ----- Card flip icon -----*/
 
-svg {
+#flip-btn > svg {
   width: 50px;
   margin: 5px auto 0;
   fill: rgba(178, 151, 150, 0.75);
   transition: all 0.2 ease;
 }
 
-svg:hover {
+#flip-btn > svg:hover {
   fill: rgba(178, 151, 150, 1);
 }
 
 /* ----- Search Bar Settings -----*/
 
-#searchContainer form {
-  display: inline;
+form {
+  position: absolute;
+  line-height: 60px;
+  width: 50%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
 }
 
 input {
-  width: 40%;
+  width: 70%;
   border: 3px solid rgba(178, 151, 114, 0.75);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   padding: 5px;
@@ -197,8 +204,9 @@ input:hover {
 
 #suggestions {
   position: absolute;
+  line-height: 28px;
   z-index: 1;
-  width: 39.5%;
+  width: 70%;
   padding: 0;
   left: 0;
   right: 0;
@@ -206,15 +214,14 @@ input:hover {
 }
 
 #suggestions li {
+  outline: 0;
+  padding: 2%;
   list-style: none;
   background-color: rgba(178, 151, 114, 1);
-  /* background-color: white; */
-  margin: 0 auto;
-  padding: 2%;
-  outline: 0;
   border-left: 1px solid rgba(0, 0, 0, 0.15);
   border-right: 1px solid rgba(0, 0, 0, 0.15);
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.15);
 }
 
 /*place holder hover / focus effects*/
@@ -245,24 +252,34 @@ li p {
 .pre {
   font-weight: bold;
 }
-
-.txt {
-}
-
 .highlight {
   background-color: rgb(255, 251, 204);
+}
+
+#left,
+#right {
+  font-size: 25px;
+  color: rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease-in-out;
+}
+
+#left:hover,
+#right:hover {
+  color: rgba(0, 0, 0, 1);
+  cursor: pointer;
 }
 
 #left {
   float: left;
 }
 
-#right {
-  float: right;
-}
-
 #pages {
   text-align: center;
+  font-size: 20px;
+}
+
+#right {
+  float: right;
 }
 
 a {

@@ -350,7 +350,7 @@ const suggestionModule = (function() {
     let currentPage = 1;
 
     left.innerHTML = "";
-    right.innerHTML = ">";
+    right.innerHTML = `<i class="fas fa-arrow-circle-right xs"></i>`;
     left.id = "left";
     right.id = "right";
 
@@ -358,8 +358,9 @@ const suggestionModule = (function() {
       if (currentPage === 1) return;
       currentPage--;
       if (currentPage === 1) left.innerHTML = ""; // removes arrow when going from page 2 to page 1
-      if (currentPage === pages - 1) right.innerHTML = ">";
-
+      if (currentPage === pages - 1) {
+        right.innerHTML = `<i class="fas fa-arrow-circle-right xs"></i>`;
+      }
       movePage(res, currentPage, regex, p);
       updatePageTxt(p, currentPage, pages);
     });
@@ -367,7 +368,8 @@ const suggestionModule = (function() {
     right.addEventListener("click", function() {
       if (currentPage === pages) return;
       currentPage++;
-      if (currentPage > 0) left.innerHTML = "<";
+      if (currentPage > 0)
+        left.innerHTML = `<i class="fas fa-arrow-circle-left xs"></i>`;
       if (currentPage === pages) right.innerHTML = "";
 
       movePage(res, currentPage, regex, p);
@@ -414,10 +416,16 @@ const suggestionModule = (function() {
 
     searchInput.addEventListener("focus", suggestionModule.displayMatches);
 
-    document.addEventListener("click", function() {
-      if (!(event.target === searchInput || suggestions.contains(event.target)))
-        removeChildren(suggestions);
-    });
+    document.addEventListener(
+      "click",
+      function() {
+        if (
+          !(event.target === searchInput || suggestions.contains(event.target))
+        )
+          removeChildren(suggestions);
+      },
+      true
+    );
   }
 
   function addArrowKeyListeners() {
@@ -467,4 +475,4 @@ const suggestionModule = (function() {
 
 suggestionModule.addSearchListeners();
 suggestionModule.addArrowKeyListeners();
-suggestionModule.randomPlaceholder();
+// suggestionModule.randomPlaceholder();
