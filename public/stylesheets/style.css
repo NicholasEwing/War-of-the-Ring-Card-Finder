@@ -291,13 +291,22 @@ a {
 
 .card {
   position: relative;
+  /* width: 80vw; */
+  /* height: 80vh; */
   width: 429px;
   height: 800px;
   padding: 50px;
   margin: 1% auto 0 auto;
   -webkit-box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.75);
+}
+
+#test {
+  height: 88vh;
+  width: 449px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .card.hide > * {
