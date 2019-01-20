@@ -10,6 +10,7 @@ function removeChildren(parentElement) {
     --------------------------------------------------------------------- */
 const cardModule = (function() {
   const cardDiv = document.getElementById("card");
+  const cardBg = document.getElementById("card-bg");
   const flipBtn = document.getElementById("flip-btn");
   const impBtn = document.getElementById("improved-text");
   const typeIcon = document.getElementById("type-icon");
@@ -38,7 +39,8 @@ const cardModule = (function() {
   function createCard(card) {
     const settings = getFactionSettings(card);
 
-    changeBg(settings);
+    // changeBg(settings);
+    newChangeBg(settings);
     changeTypeIcon(settings);
     changeBoxSizes(card);
     replaceCardText(card);
@@ -126,18 +128,23 @@ const cardModule = (function() {
   }
 
   function getFactionSettings(card) {
-    const fac = card.faction === "free-peoples" ? "fp" : "shadow";
+    const fac = card.faction;
 
     const settings = {};
     if (card.specialHuntTileImg) {
-      settings.bgClass = card.specialHuntTileImg;
+      // TODO make this work
+      settings.bgImg = card.specialHuntTileImg;
     } else {
-      settings.bgClass = `${fac}-${card.cardSize}`;
+      settings.bgImg = `/images/card-art/blanks/${fac}-${card.cardSize}.jpg`;
     }
     settings.imgClass = `type-icon-${fac}`;
     settings.iconSrc = `${fac}-${card.type}-icon.png`;
 
     return settings;
+  }
+
+  function newChangeBg(settings) {
+    cardBg.src = settings.bgImg;
   }
 
   function changeBg(settings) {

@@ -289,44 +289,39 @@ a {
 
 /* ----- General Card Settings -----*/
 
-.card {
+#card {
+  height: 85vh;
   position: relative;
-  /* width: 80vw; */
-  /* height: 80vh; */
-  width: 429px;
-  height: 800px;
-  padding: 50px;
-  margin: 1% auto 0 auto;
+  display: inline-block;
+  margin: 10px auto 0 auto;
   -webkit-box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.75);
 }
 
-#test {
+#card-bg {
   height: 85vh;
-  margin: 10px auto 0 auto;
-  display: block;
 }
 
-.card.hide > * {
+#card.hide > * {
   visibility: hidden;
 }
 
-.card.flip-left {
+#card.flip-left {
   -webkit-animation: flip-vertical-left 0.4s
     cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
   animation: flip-vertical-left 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955)
     both;
 }
 
-.card.flip-right {
+#card.flip-right {
   -webkit-animation: flip-vertical-right 0.4s
     cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
   animation: flip-vertical-right 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955)
     both;
 }
 
-.shadow-1 {
+/* .shadow-1 {
   background: url(/images/card-art/blanks/Blank-Shadow-Card-1.jpg);
   background-size: auto 100%;
 }
@@ -364,7 +359,7 @@ a {
 .fp-4 {
   background: url(/images/card-art/blanks/Blank-FP-Card-4.jpg);
   background-size: auto 100%;
-}
+} */
 
 /* -------- Special Hunt Tile Bgs -------- */
 
@@ -438,12 +433,12 @@ a {
 
 /* -------- Event Section --------*/
 
-.event-box-free-peoples p,
+.event-box-fp p,
 .event-box-shadow p {
   text-align: left;
 }
 
-.event-box-free-peoples {
+.event-box-fp {
   position: absolute;
   top: 14%;
   width: 315px;
@@ -456,11 +451,21 @@ a {
 }
 
 #event-title {
+  position: absolute;
+  width: 47%;
+  top: 6.5%;
+  right: 26.5%;
   font-size: 25px;
-  width: 63%;
   margin: 0 auto;
   font-family: PonaDisplay;
   font-style: bold;
+}
+
+#event-text,
+#precondition,
+#discard-condition {
+  position: relative;
+  right: -15%;
 }
 
 #precondition,
@@ -474,7 +479,7 @@ a {
 
 /* -------- Combat Section --------*/
 
-.combat-box-free-peoples {
+.combat-box-fp {
   width: 325px;
   height: 200px;
   text-align: right;
