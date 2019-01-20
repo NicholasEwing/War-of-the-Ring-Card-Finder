@@ -3,7 +3,12 @@
   <head>
     <title>Card Generator</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <div id="navbar">
@@ -16,23 +21,18 @@
           autofocus
         />
         <ul id="suggestions"></ul>
-    </form>
-    <a href="/">
+      </form>
       <ul id="nav-container">
-          <li id="brand">War of the Ring Card Finder</li>
-        </li>
-      </a>
+        <a href="/"> <li id="brand">War of the Ring Card Finder</li> </a>
         <a href="https://github.com/NicholasEwing/WarOfTheRing-EventCards">
-        <li class="nav-btn">
-            <i class="fab fa-github fa-lg"></i>
-            Github
+          <li class="nav-btn"><i class="fab fa-github fa-lg"></i> Github</li>
+        </a>
+        <a id="improved-text" href="#">
+          <li class="nav-btn">
+            <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i> Show
+            Improved Card Text
           </li>
         </a>
-        <!-- <a href="#">
-        <li class="nav-btn">
-            <i class="fas fa-question-circle fa-lg"></i>About
-          </li>
-        </a> -->
       </ul>
     </div>
     <% if(card === null || typeof card === undefined) { %>
@@ -48,6 +48,7 @@
       </div>
       <div id="combat-box">
         <h1 id="combat-title"></h1>
+        <p id="combat-precondition"></p>
         <p id="combat-text"></p>
       </div>
       <p id="initiative-number"></p>

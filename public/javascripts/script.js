@@ -11,6 +11,7 @@ function removeChildren(parentElement) {
 const cardModule = (function() {
   const cardDiv = document.getElementById("card");
   const flipBtn = document.getElementById("flip-btn");
+  const impBtn = document.getElementById("improved-text");
   const typeIcon = document.getElementById("type-icon");
 
   const eventBox = document.getElementById("event-box");
@@ -21,10 +22,15 @@ const cardModule = (function() {
 
   const combatBox = document.getElementById("combat-box");
   const combatTitle = document.getElementById("combat-title");
+  const combatPre = document.getElementById("combat-precondition");
   const combatText = document.getElementById("combat-text");
 
   const initiativeNumber = document.getElementById("initiative-number");
   const cardNumber = document.getElementById("card-number");
+
+  let improvedToggle = false;
+  let improvedListen = false;
+  let improvedBtnListener;
 
   let listening = false;
   let listener;
@@ -37,6 +43,21 @@ const cardModule = (function() {
     changeBoxSizes(card);
     replaceCardText(card);
     flipBtnReset(card);
+    resetImprovedBtn(card);
+  }
+
+  function resetImprovedBtn(card) {
+    if (improvedListen) {
+      impBtn.removeEventListener("click", improvedBtnListener);
+    }
+
+    improvedBtnListener = function() {
+      improvedToggle ? replaceCardText(card) : showImprovedText(card);
+      improvedToggle = !improvedToggle;
+    };
+
+    impBtn.addEventListener("click", improvedBtnListener);
+    improvedListen = true;
   }
 
   function flipBtnReset(card) {
@@ -108,8 +129,11 @@ const cardModule = (function() {
     const fac = card.faction === "free-peoples" ? "fp" : "shadow";
 
     const settings = {};
-
-    settings.bgClass = `${fac}-${card.cardSize}`;
+    if (card.specialHuntTileImg) {
+      settings.bgClass = card.specialHuntTileImg;
+    } else {
+      settings.bgClass = `${fac}-${card.cardSize}`;
+    }
     settings.imgClass = `type-icon-${fac}`;
     settings.iconSrc = `${fac}-${card.type}-icon.png`;
 
@@ -119,6 +143,7 @@ const cardModule = (function() {
   function changeBg(settings) {
     const oldClass = cardDiv.classList.item(1);
     const bgClass = settings.bgClass;
+
     if (oldClass) {
       cardDiv.classList.replace(oldClass, bgClass);
     } else {
@@ -170,9 +195,31 @@ const cardModule = (function() {
     eventText.innerHTML = card.eventText;
     eventDiscard.innerHTML = card.discardCondition;
     combatTitle.innerHTML = card.combatTitle;
+    combatPre.innerHTML = card.combatPrecondition;
     combatText.innerHTML = card.combatText;
     initiativeNumber.innerHTML = card.initiativeNumber;
     cardNumber.innerHTML = card.cardNumber;
+  }
+
+  function showImprovedText(card) {
+    const improvedPre = card.improvedPrecondition;
+    const improvedEv = card.improvedEventText;
+    const improvedDisc = card.improvedDiscardCondition;
+    const improvedComPre = card.improvedCombatPrecondition;
+    const improvedComTxt = card.improvedCombatText;
+
+    improvedPre ? (eventPre.innerHTML = improvedPre) : false;
+    improvedEv ? (eventText.innerHTML = improvedEv) : false;
+    improvedDisc ? (eventDiscard.innerHTML = improvedDisc) : false;
+    improvedComPre ? (combatPre.innerHTML = improvedComPre) : false;
+    improvedComTxt ? (combatText.innerHTML = improvedComTxt) : false;
+  }
+
+  function improvedTxtBtnReset(listener) {
+    improvedToggle = false;
+    const btn = document.getElementById("improved-text");
+    btn.removeEventListener("click", listener);
+    btn.addEventListener("click", listener);
   }
 
   return {
@@ -475,4 +522,5 @@ const suggestionModule = (function() {
 
 suggestionModule.addSearchListeners();
 suggestionModule.addArrowKeyListeners();
+// cardModule.improvedTextListener();
 // suggestionModule.randomPlaceholder();

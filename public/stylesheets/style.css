@@ -91,7 +91,7 @@ html {
 
 body {
   min-height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
   box-sizing: border-box;
   text-align: center;
   margin: 0px;
@@ -108,7 +108,7 @@ button {
 }
 
 textarea {
-  width: 20%;
+  width: 80%;
   height: 100px;
 }
 
@@ -137,9 +137,8 @@ textarea {
 
 #nav-container li {
   line-height: 60px;
-  margin: auto 25px;
+  margin: 0 10px 0 10px;
   font-size: 20px;
-  padding-right: 30px;
 }
 
 #nav-container li:hover {
@@ -359,6 +358,43 @@ a {
   background-size: auto 100%;
 }
 
+/* -------- Special Hunt Tile Bgs -------- */
+
+.dice {
+  background: url(/images/hunt-tiles/dice.jpg);
+  background-size: auto 100%;
+}
+
+.eye {
+  background: url(/images/hunt-tiles/eye.jpg);
+  background-size: auto 100%;
+}
+
+.minus1 {
+  background: url(/images/hunt-tiles/minus1.jpg);
+  background-size: auto 100%;
+}
+
+.minus2 {
+  background: url(/images/hunt-tiles/minus2.jpg);
+  background-size: auto 100%;
+}
+
+.plus1 {
+  background: url(/images/hunt-tiles/plus1.jpg);
+  background-size: auto 100%;
+}
+
+.plus3 {
+  background: url(/images/hunt-tiles/plus3.jpg);
+  background-size: auto 100%;
+}
+
+.zero {
+  background: url(/images/hunt-tiles/zero.jpg);
+  background-size: auto 100%;
+}
+/* --------------------------------------- */
 .type-icon-fp {
   position: absolute;
   right: 37.7px;
@@ -376,7 +412,8 @@ a {
 #event-text,
 #precondition,
 #discard-condition,
-#combat-text {
+#combat-text,
+#combat-precondition {
   margin: 2% 2% 2% 2%;
   font-size: 19px;
   font-family: PonaDisplay;
@@ -418,19 +455,13 @@ a {
   font-style: bold;
 }
 
-#precondition {
+#precondition,
+#combat-precondition {
   font-weight: 600;
 }
 
 #discard-condition {
   font-style: italic;
-}
-
-#special-hunt-tile-img {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  margin-left: -5rem;
 }
 
 /* -------- Combat Section --------*/
@@ -491,7 +522,7 @@ a {
   color: white;
 }
 
-@media all and (max-width: 1000px) {
+@media all and (max-width: 1200px) {
   #brand {
     display: none;
   }
