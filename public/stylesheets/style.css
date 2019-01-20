@@ -303,10 +303,9 @@ a {
 }
 
 #test {
-  height: 88vh;
-  width: 449px;
-  background-repeat: no-repeat;
-  background-position: center;
+  height: 85vh;
+  margin: 10px auto 0 auto;
+  display: block;
 }
 
 .card.hide > * {
