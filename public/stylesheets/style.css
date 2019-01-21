@@ -130,11 +130,15 @@ textarea {
   transition: all 0.2ms ease-in-out;
 }
 
+#nav-container a {
+  display: block;
+  margin-left: 0.75vh;
+  margin-right: 2.5vh;
+}
+
 #nav-container li {
-  line-height: 6vh;
-  padding-left: 0.75vh;
-  padding-right: 2vh;
-  font-size: 2vh;
+  line-height: 5vh;
+  height: 6vh;
 }
 
 #nav-container li:hover {
@@ -143,15 +147,35 @@ textarea {
 
 .nav-btn {
   float: right;
+  padding-left: 3.25vh;
+  padding-right: 3.25vh;
+  font-size: 3.25vh;
 }
 
-i {
-  margin-right: 0.5vh;
+.nav-btn p {
+  display: inline;
 }
 
-#brand {
+.nav-btn .fa-lg,
+#brand .fa-lg {
+  vertical-align: -0.8vh;
+  font-size: 4vh;
+}
+
+#nav-container #brand {
   float: left;
+  font-size: 2vh;
+  margin-left: 2vh;
+  line-height: 6vh;
   font-family: "Ringbearer";
+}
+
+#brand p {
+  display: inline;
+}
+
+#brand i {
+  display: none;
 }
 
 /* ----- Card flip icon -----*/
@@ -172,19 +196,19 @@ i {
 
 form {
   position: absolute;
+  width: 30%;
   line-height: 6vh;
-  width: 50%;
   margin: 0 auto;
   left: 0;
   right: 0;
 }
 
 input {
-  width: 70%;
+  width: 100%;
   border: 0.3vh solid rgba(178, 151, 114, 0.75);
   box-shadow: 0 0.4vh 0.8vh rgba(0, 0, 0, 0.15);
   padding: 0.5vh;
-  font-size: 2.5vh;
+  font-size: 2.15vh;
   height: 5.5vh;
   outline: none;
   transition: all 0.2s ease-in-out;
@@ -201,7 +225,7 @@ input:hover {
   position: absolute;
   line-height: 3vh;
   z-index: 1;
-  width: 70%;
+  width: 100%;
   padding: 0;
   left: 0;
   right: 0;
@@ -360,7 +384,7 @@ a {
 
 .event-box-fp {
   position: absolute;
-  top: 13.5%;
+  top: 13.3%;
   width: 33vh;
 }
 
@@ -438,6 +462,7 @@ a {
   bottom: 8%;
   right: 11%;
 }
+
 /* ------- Bottom Card Text -------*/
 
 #initiative-number {
@@ -451,21 +476,36 @@ a {
 #card-number {
   position: absolute;
   top: 96%;
-  font-size: 0.6rem;
+  font-size: 1.25vh;
   right: 2.75%;
   color: white;
 }
 
-@media all and (max-width: 1200px) {
-  #brand {
-    display: none;
-  }
-
-  .nav-btn {
-    display: none;
-  }
-
+@media all and (max-width: 1440px) {
   form {
-    width: 90%;
+    width: 50%;
+  }
+
+  #brand p {
+    display: none;
+  }
+
+  #brand i {
+    display: inline;
+  }
+
+  #nav-container a,
+  .nav-btn {
+    margin: auto 0;
+    padding: 0 1vw;
+  }
+
+  .nav-btn p {
+    display: none;
+  }
+
+  .nav-btn a {
+    margin-right: 2vh;
+    font-size: 3.5vh;
   }
 }

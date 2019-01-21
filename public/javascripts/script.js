@@ -530,5 +530,3 @@ const suggestionModule = (function() {
 
 suggestionModule.addSearchListeners();
 suggestionModule.addArrowKeyListeners();
-// cardModule.improvedTextListener();
-// suggestionModule.randomPlaceholder();
