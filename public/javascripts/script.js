@@ -120,6 +120,7 @@ const cardModule = (function() {
     cardDiv.style.backgroundImage = `url(/images/cardbacks/${card.faction}-${
       card.deckSource
     }-cardback.jpg)`;
+    cardDiv.style.backgroundSize = "auto 100%";
   }
 
   function revealCard() {

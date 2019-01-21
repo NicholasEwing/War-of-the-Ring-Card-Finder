@@ -114,14 +114,9 @@ textarea {
 
 /* -------- Nav bar -------- */
 
-#navbar li > svg {
-  width: 30px;
-  margin: -10px 5px;
-}
-
 #navbar {
   margin: 0;
-  height: 60px;
+  height: 6vh;
   text-align: center;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   background-color: rgba(178, 151, 114, 1);
@@ -136,9 +131,11 @@ textarea {
 }
 
 #nav-container li {
-  line-height: 60px;
-  margin: 0 10px 0 10px;
-  font-size: 20px;
+  line-height: 6vh;
+  padding-left: 10px;
+  padding-right: 10px;
+  /* margin: 0 10px 0 10px; */
+  font-size: 2vh;
 }
 
 #nav-container li:hover {
@@ -163,7 +160,7 @@ i {
 /* ----- Card flip icon -----*/
 
 #flip-btn > svg {
-  width: 6vh;
+  width: 5vh;
   display: block;
   margin: 5px auto 0;
   fill: rgba(178, 151, 150, 0.75);
@@ -524,6 +521,7 @@ a {
 #initiative-number {
   position: absolute;
   font-weight: bold;
+  font-size: 1.7vh;
   top: 89.5%;
   left: 11.5%;
 }
