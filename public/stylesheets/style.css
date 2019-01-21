@@ -118,7 +118,7 @@ textarea {
   margin: 0;
   height: 6vh;
   text-align: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0.4vh 0.95vh rgba(0, 0, 0, 0.15);
   background-color: rgba(178, 151, 114, 1);
 }
 
@@ -132,9 +132,8 @@ textarea {
 
 #nav-container li {
   line-height: 6vh;
-  padding-left: 10px;
-  padding-right: 10px;
-  /* margin: 0 10px 0 10px; */
+  padding-left: 0.75vh;
+  padding-right: 2vh;
   font-size: 2vh;
 }
 
@@ -147,13 +146,11 @@ textarea {
 }
 
 i {
-  margin-right: 6px;
+  margin-right: 0.5vh;
 }
 
 #brand {
   float: left;
-  font-size: 1vw;
-  padding-left: 30px;
   font-family: "Ringbearer";
 }
 
@@ -162,7 +159,7 @@ i {
 #flip-btn > svg {
   width: 5vh;
   display: block;
-  margin: 5px auto 0;
+  margin: 0 auto;
   fill: rgba(178, 151, 150, 0.75);
   transition: all 0.2 ease;
 }
@@ -175,7 +172,7 @@ i {
 
 form {
   position: absolute;
-  line-height: 60px;
+  line-height: 6vh;
   width: 50%;
   margin: 0 auto;
   left: 0;
@@ -184,25 +181,25 @@ form {
 
 input {
   width: 70%;
-  border: 3px solid rgba(178, 151, 114, 0.75);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-  padding: 5px;
-  font-size: 20px;
-  height: 50px;
+  border: 0.3vh solid rgba(178, 151, 114, 0.75);
+  box-shadow: 0 0.4vh 0.8vh rgba(0, 0, 0, 0.15);
+  padding: 0.5vh;
+  font-size: 2.5vh;
+  height: 5.5vh;
   outline: none;
   transition: all 0.2s ease-in-out;
-  background: url(/images/search-solid.svg) no-repeat right 4px bottom 8px/30px
+  background: url(/images/search-solid.svg) no-repeat right 0.5vh bottom 1vh/3vh
     scroll;
   background-color: white;
 }
 
 input:hover {
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0.75vh 1.25vh rgba(0, 0, 0, 0.3);
 }
 
 #suggestions {
   position: absolute;
-  line-height: 28px;
+  line-height: 3vh;
   z-index: 1;
   width: 70%;
   padding: 0;
@@ -238,12 +235,12 @@ input:hover {
 li h1 {
   text-align: left;
   margin: 0;
-  font-size: 25px;
+  font-size: 2.5vh;
 }
 
 li p {
   text-align: left;
-  font-size: 18px;
+  font-size: 2vh;
   margin: 0;
 }
 
@@ -256,7 +253,7 @@ li p {
 
 #left,
 #right {
-  font-size: 25px;
+  font-size: 3vh;
   color: rgba(0, 0, 0, 0.5);
   transition: all 0.2s ease-in-out;
 }
@@ -273,7 +270,7 @@ li p {
 
 #pages {
   text-align: center;
-  font-size: 20px;
+  font-size: 2vh;
 }
 
 #right {
@@ -319,83 +316,8 @@ a {
     both;
 }
 
-/* .shadow-1 {
-  background: url(/images/card-art/blanks/Blank-Shadow-Card-1.jpg);
-  background-size: auto 100%;
-}
-
-.shadow-2 {
-  background: url(/images/card-art/blanks/Blank-Shadow-Card-2.jpg);
-  background-size: auto 100%;
-}
-
-.shadow-3 {
-  background: url(/images/card-art/blanks/Blank-Shadow-Card-3.jpg);
-  background-size: auto 100%;
-}
-
-.shadow-4 {
-  background: url(/images/card-art/blanks/Blank-Shadow-Card-4.jpg);
-  background-size: auto 100%;
-}
-
-.fp-1 {
-  background: url(/images/card-art/blanks/Blank-FP-Card-1.jpg);
-  background-size: auto 100%;
-}
-
-.fp-2 {
-  background: url(/images/card-art/blanks/Blank-FP-Card-2.jpg);
-  background-size: auto 100%;
-}
-
-.fp-3 {
-  background: url(/images/card-art/blanks/Blank-FP-Card-3.jpg);
-  background-size: auto 100%;
-}
-
-.fp-4 {
-  background: url(/images/card-art/blanks/Blank-FP-Card-4.jpg);
-  background-size: auto 100%;
-} */
-
-/* -------- Special Hunt Tile Bgs -------- */
-
-.dice {
-  background: url(/images/hunt-tiles/dice.jpg);
-  background-size: auto 100%;
-}
-
-.eye {
-  background: url(/images/hunt-tiles/eye.jpg);
-  background-size: auto 100%;
-}
-
-.minus1 {
-  background: url(/images/hunt-tiles/minus1.jpg);
-  background-size: auto 100%;
-}
-
-.minus2 {
-  background: url(/images/hunt-tiles/minus2.jpg);
-  background-size: auto 100%;
-}
-
-.plus1 {
-  background: url(/images/hunt-tiles/plus1.jpg);
-  background-size: auto 100%;
-}
-
-.plus3 {
-  background: url(/images/hunt-tiles/plus3.jpg);
-  background-size: auto 100%;
-}
-
-.zero {
-  background: url(/images/hunt-tiles/zero.jpg);
-  background-size: auto 100%;
-}
 /* --------------------------------------- */
+
 .type-icon-fp {
   position: absolute;
   right: 4vh;
@@ -438,7 +360,7 @@ a {
 
 .event-box-fp {
   position: absolute;
-  top: 14%;
+  top: 13.5%;
   width: 33vh;
 }
 
