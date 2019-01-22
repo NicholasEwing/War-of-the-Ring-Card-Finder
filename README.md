@@ -2,6 +2,8 @@
 
 In this project, I've created a web application where you can search and find event cards from the popular War of the Ring (2nd Edition) board game.
 
+[Click here to view a demo](https://war-of-the-ring-card-finder.herokuapp.com/#)
+
 Technologies used:
 
 - HTML5
