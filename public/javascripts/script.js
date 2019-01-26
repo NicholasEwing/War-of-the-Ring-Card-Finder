@@ -40,7 +40,7 @@ const cardModule = (function() {
     const settings = getFactionSettings(card);
 
     // changeBg(settings);
-    newChangeBg(settings);
+    changeBg(settings);
     changeTypeIcon(settings);
     changeBoxSizes(card);
     replaceCardText(card);
@@ -144,20 +144,8 @@ const cardModule = (function() {
     return settings;
   }
 
-  function newChangeBg(settings) {
-    cardBg.src = settings.bgImg;
-  }
-
   function changeBg(settings) {
-    const oldClass = cardDiv.classList.item(1);
-    const bgClass = settings.bgClass;
-
-    if (oldClass) {
-      cardDiv.classList.replace(oldClass, bgClass);
-    } else {
-      cardDiv.classList.add("card");
-      cardDiv.classList.add(bgClass);
-    }
+    cardBg.src = settings.bgImg;
   }
 
   function changeTypeIcon(settings) {
@@ -221,13 +209,6 @@ const cardModule = (function() {
     improvedDisc ? (eventDiscard.innerHTML = improvedDisc) : false;
     improvedComPre ? (combatPre.innerHTML = improvedComPre) : false;
     improvedComTxt ? (combatText.innerHTML = improvedComTxt) : false;
-  }
-
-  function improvedTxtBtnReset(listener) {
-    improvedToggle = false;
-    const btn = document.getElementById("improved-text");
-    btn.removeEventListener("click", listener);
-    btn.addEventListener("click", listener);
   }
 
   return {
