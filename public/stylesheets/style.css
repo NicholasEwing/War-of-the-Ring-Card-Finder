@@ -363,6 +363,7 @@ a {
 #combat-precondition {
   margin: 2% 2% 2% 2%;
   font-size: 2vh;
+  line-height: 1.25;
   font-family: PonaDisplay;
   white-space: pre-wrap;
 }
@@ -400,6 +401,7 @@ a {
   top: 6.5%;
   right: 27%;
   font-size: 2.6vh;
+  line-height: 1.3;
   margin: 0 auto;
   font-family: PonaDisplay;
   font-style: bold;
