@@ -7,11 +7,7 @@ const indexRouter = require("./routes/index");
 const app = express();
 
 // Connect MongoDB
-const url =
-  process.env.DATABASEURL ||
-  `mongodb+srv://arthix:${
-    process.env.MONGO_PASS
-  }@warofthering-eventcards-6hxxu.mongodb.net/wotr-eventcards?retryWrites=true`;
+const url =  process.env.DATABASEURL || 'mongodb://localhost/wotr';
 mongoose.set("useCreateIndex", true);
 mongoose.connect(
   url,
