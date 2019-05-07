@@ -501,13 +501,25 @@ const suggestionModule = (function() {
     });
   }
 
+  function preventFormSubmit() {
+    document.addEventListener("keydown", function(event) {
+      // block enter key from submitting
+      if(event.keyCode === 13) {
+        event.preventDefault();
+        return false;
+      }
+    })
+  }
+
   return {
     displayMatches: displayMatches,
     addSearchListeners: addSearchListeners,
     addArrowKeyListeners: addArrowKeyListeners,
+    preventFormSubmit: preventFormSubmit,
     randomPlaceholder: randomPlaceholder
   };
 })();
 
 suggestionModule.addSearchListeners();
 suggestionModule.addArrowKeyListeners();
+suggestionModule.preventFormSubmit();
