@@ -23,7 +23,7 @@ const CardController = require("../controllers/cardController");
 
 router.route("/")
 	.get(CardController.getCard)
-	.post(upload.single("specialHuntTileImg"), CardController.createCard);
+	// .post(upload.single("specialHuntTileImg"), CardController.createCard);
 
 // router.route("/create")
 // 	.get(CardController.getCreationForm)
